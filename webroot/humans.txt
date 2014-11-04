@@ -1,0 +1,1 @@
+Mapo is a PHP-boilerplate/framework for small websites. Mapo was built by Marko Poikkimäki.

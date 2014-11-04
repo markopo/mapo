@@ -1,7 +1,59 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: marko
- * Date: 04/11/2014
- * Time: 20:44
- */ 
+ * Config-file for mapo. Change settings here to affect installation.
+ *
+ */
+
+/**
+ * Set the error reporting.
+ *
+ */
+error_reporting(-1);              // Report all type of errors
+ini_set('display_errors', 1);     // Display all errors
+ini_set('output_buffering', 0);   // Do not buffer outputs, write directly
+
+
+/**
+ * Define mapo paths.
+ *
+ */
+define('MAPO_INSTALL_PATH', __DIR__ . '/..');
+define('MAPO_THEME_PATH', MAPO_INSTALL_PATH . '/theme/render.php');
+
+
+/**
+ * Include bootstrapping functions.
+ *
+ */
+include(MAPO_INSTALL_PATH . '/src/bootstrap.php');
+
+
+/**
+ * Start the session.
+ *
+ */
+session_name(preg_replace('/[^a-z\d]/i', '', __DIR__));
+session_start();
+
+
+/**
+ * Create the mapo variable.
+ *
+ */
+$mapo = array();
+
+
+/**
+ * Site wide settings.
+ *
+ */
+$mapo['lang']         = 'sv';
+$mapo['title_append'] = ' | mapo en webbtemplate';
+
+
+/**
+ * Theme related settings.
+ *
+ */
+$mapo['stylesheet'] = 'css/style.css';
+$mapo['favicon']    = 'favicon.ico';
