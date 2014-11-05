@@ -8,9 +8,21 @@
 </head>
 <body>
 <div id='wrapper'>
-    <div id='header'><?=$header?></div>
-    <div id='main'><?=$main?></div>
-    <div id='footer'><?=$footer?></div>
+    <header>
+        <div id="header-wrap">
+        <?=$header?>
+        </div>
+    </header>
+    <div id='main'>
+        <div id="main-wrap">
+            <?=$main?>
+        </div>
+    </div>
+    <footer>
+        <div id="footer-wrap">
+        <?=$footer?>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

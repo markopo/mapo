@@ -25,7 +25,7 @@ define('MAPO_THEME_PATH', MAPO_INSTALL_PATH . '/theme/render.php');
  * Include bootstrapping functions.
  *
  */
-include(MAPO_INSTALL_PATH . '/src/bootstrap.php');
+include(MAPO_INSTALL_PATH. '/src/bootstrap.php');
 
 
 /**
@@ -56,4 +56,4 @@ $mapo['title_append'] = ' | mapo en webbtemplate';
  *
  */
 $mapo['stylesheet'] = 'css/style.css';
-$mapo['favicon']    = 'favicon.ico';
+$mapo['favicon']    = 'mapo.png';
