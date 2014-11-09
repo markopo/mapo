@@ -55,5 +55,34 @@ $mapo['title_append'] = ' | mapo en webbtemplate';
  * Theme related settings.
  *
  */
-$mapo['stylesheet'] = 'css/style.css';
+$mapo['stylesheets'] = array('css/style.css');
 $mapo['favicon']    = 'mapo.png';
+
+
+/**
+ * Navigation menu settings
+ *
+ */
+
+$mapo['navmenu'] = array(
+    'callback' => 'selectedPage',
+    'items' => array(
+    'me' => array('text' => 'Me', 'url' => 'me.php', 'class'=>null),
+    'source' => array('text' => 'Source', 'url' => 'source.php', 'class'=>null)
+    )
+);
+
+/**
+ * Settings for JavaScript.
+ *
+ */
+$mapo['modernizr'] = 'js/modernizr.js';
+$mapo['jquery'] = 'js/jquery.min.js';
+$mapo['javascript_include'] = array('js/main.js', 'js/unslider.min.js');
+
+
+/**
+ * Google analytics.
+ *
+ */
+$mapo['google_analytics'] = null;

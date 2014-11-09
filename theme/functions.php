@@ -14,3 +14,15 @@ function get_title($title) {
 global $mapo;
 return $title . (isset($mapo['title_append']) ? $mapo['title_append'] : null);
 }
+
+function selectedPage($items) {
+    $page = str_replace(".php", "", basename($_SERVER['PHP_SELF']));
+    if(array_key_exists($page, $items)){
+        $items[$page]["class"] .= "selected";
+    }
+    return $items;
+}
+
+function dump($array) {
+    echo "<pre>" . htmlentities(print_r($array, 1)) . "</pre>";
+}
