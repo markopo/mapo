@@ -17,7 +17,7 @@ body {
 }
 
 /* unslider */
-.banner { position: relative; overflow: auto; margin: 0; padding: 0; }
+.banner { position: relative; overflow: auto; margin: -10px 0 0 0; padding: 0; }
 .banner ul { margin: 0; padding: 0; width: 960px; }
 .banner li { list-style: none;  margin: 0; padding: 0; }
 .banner ul li { float: left;  margin: 0; padding: 0; width: 960px; height:540px; }
