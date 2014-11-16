@@ -8,15 +8,17 @@ $mapo['title'] = "Me";
 
 $mapo['header'] =  Template::Header();
 
+
+$imageSlider = "";
+
+for($i=1;$i<16;$i++){
+  $imageSlider .= "<li><img src='img/ibiza{$i}.jpg' alt='ibiza' ></li>";
+}
+
 $mapo['main'] = <<< TEMPLATE
 <div class="banner">
     <ul>
-        <li><img src="img/ibiza1.jpg" alt="ibiza" ></li>
-        <li><img src="img/ibiza2.jpg" alt="ibiza" ></li>
-        <li><img src="img/ibiza3.jpg" alt="ibiza" ></li>
-        <li><img src="img/ibiza4.jpg" alt="ibiza" ></li>
-        <li><img src="img/ibiza5.jpg" alt="ibiza" ></li>
-        <li><img src="img/ibiza6.jpg" alt="ibiza" ></li>
+        $imageSlider
     </ul>
 </div>
 <div>
