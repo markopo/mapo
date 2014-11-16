@@ -55,7 +55,7 @@ $mapo['title_append'] = ' | mapo en webbtemplate';
  * Theme related settings.
  *
  */
-$mapo['stylesheets'] = array('css/style.css');
+$mapo['stylesheets'] = array('css/style.css', 'css/babes.css');
 $mapo['favicon']    = 'mapo.png';
 
 
@@ -68,7 +68,8 @@ $mapo['navmenu'] = array(
     'callback' => 'selectedPage',
     'items' => array(
     'me' => array('text' => 'Me', 'url' => 'me.php', 'class'=>null),
-    'source' => array('text' => 'Source', 'url' => 'source.php', 'class'=>null)
+    'source' => array('text' => 'Source', 'url' => 'source.php', 'class'=>null),
+    'calendar' => array('text' => 'Calendar', 'url' => 'calendar.php', 'class'=>null)
     )
 );
 
