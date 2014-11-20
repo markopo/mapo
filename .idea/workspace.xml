@@ -77,19 +77,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="me.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="me.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webroot/me.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="311" max-vertical-offset="1139">
-              <caret line="50" column="5" selection-start-line="50" selection-start-column="0" selection-end-line="54" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.46618357" vertical-offset="277" max-vertical-offset="1462">
+              <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
               <folding>
-                <marker date="1416158682361" expanded="true" signature="273:320" placeholder="..." />
-                <marker date="1416158682361" expanded="true" signature="282:313" placeholder="..." />
-                <marker date="1416158682361" expanded="true" signature="326:979" placeholder="..." />
-                <marker date="1416158682361" expanded="true" signature="326:2182" placeholder="..." />
-                <marker date="1416158682361" expanded="true" signature="353:918" placeholder="..." />
-                <marker date="1416158682361" expanded="true" signature="1096:1356" placeholder="..." />
-                <marker date="1416158682361" expanded="true" signature="1360:2140" placeholder="..." />
+                <marker date="1416505845215" expanded="true" signature="273:320" placeholder="..." />
+                <marker date="1416505845215" expanded="true" signature="282:313" placeholder="..." />
+                <marker date="1416505845215" expanded="true" signature="326:3817" placeholder="..." />
+                <marker date="1416505845215" expanded="true" signature="326:5020" placeholder="..." />
+                <marker date="1416505845215" expanded="true" signature="3191:3756" placeholder="..." />
+                <marker date="1416505845215" expanded="true" signature="3934:4194" placeholder="..." />
+                <marker date="1416505845215" expanded="true" signature="4198:4978" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -117,10 +117,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="babes.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="babes.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webroot/css/babes.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15686275" vertical-offset="0" max-vertical-offset="1632">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1632">
               <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
@@ -166,13 +166,13 @@
         <option value="$PROJECT_DIR$/webroot/hello.php" />
         <option value="$PROJECT_DIR$/webroot/calendar.php" />
         <option value="$PROJECT_DIR$/src/Template/Template.php" />
-        <option value="$PROJECT_DIR$/webroot/me.php" />
         <option value="$PROJECT_DIR$/webroot/config.php" />
         <option value="$PROJECT_DIR$/webroot/manadens_babe.php" />
         <option value="$PROJECT_DIR$/src/HtmlCalendar/HtmlCalendar.php" />
         <option value="$PROJECT_DIR$/src/CalendarDay/CalendarDay.php" />
         <option value="$PROJECT_DIR$/src/Calendar/Calendar.php" />
         <option value="$PROJECT_DIR$/webroot/css/babes.css" />
+        <option value="$PROJECT_DIR$/webroot/me.php" />
       </list>
     </option>
   </component>
@@ -262,47 +262,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="webroot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webroot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="babes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="theme" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mapo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mapo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -490,13 +464,13 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="1105">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding>
-            <marker date="1416158682361" expanded="true" signature="273:320" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="282:313" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="326:979" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="326:2182" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="353:918" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="1096:1356" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="1360:2140" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="273:320" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="282:313" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="326:3817" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="326:5020" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="3191:3756" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="3934:4194" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="4198:4978" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -787,22 +761,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webroot/me.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="311" max-vertical-offset="1139">
-          <caret line="50" column="5" selection-start-line="50" selection-start-column="0" selection-end-line="54" selection-end-column="9" />
-          <folding>
-            <marker date="1416158682361" expanded="true" signature="273:320" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="282:313" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="326:979" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="326:2182" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="353:918" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="1096:1356" placeholder="..." />
-            <marker date="1416158682361" expanded="true" signature="1360:2140" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webroot/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="519" max-vertical-offset="1615">
@@ -873,9 +831,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webroot/css/babes.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15686275" vertical-offset="0" max-vertical-offset="1632">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1632">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webroot/me.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46618357" vertical-offset="277" max-vertical-offset="1462">
+          <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
+          <folding>
+            <marker date="1416505845215" expanded="true" signature="273:320" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="282:313" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="326:3817" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="326:5020" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="3191:3756" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="3934:4194" placeholder="..." />
+            <marker date="1416505845215" expanded="true" signature="4198:4978" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

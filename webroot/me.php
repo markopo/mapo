@@ -22,7 +22,26 @@ $mapo['main'] = <<< TEMPLATE
     </ul>
 </div>
 <div>
-<h2>Hej allihopa!</h2>
+<h2>KMOM02 - Objektorienterad programmering i PHP</h2>
+<p>Jag har väl rätt goda kunskaper i objektorienterad programmering, jag jobbar ju dagligen med objektorienterad programmering i C# mestadels med ASP.NET MVC. Tycker väl att jag kan det rätt
+bra, men allt kan jag nog inte ändå. Det finns nog en del saker som man inte har koll på. Men det är klart det är en liten omställning att skriva objektorienterat i PHP. Iofs har jag gjort det innan
+på fritiden med lite småprojekt. Men framförallt känns det väldigt uppfriskande att koda i ett annat språk. Ändå känns väl objektorienterade lösningar som något som aldrig tar slut. Det går ju
+abstrahera ut i all oändlighet. Tycker ändå det kan vara viktigt att sätta ner foten, nu är det nog; nu är det tillräckligt mycket abstraktion. Min filosofi är att få saker gjort med tillräckligt
+mycket med klasser och tjafs.</p>
+<p>Jag valde <i>Månadens babe</i> för att den uppgiften tilltalade mig mer än tärningsspelet. Jag började uppgiften med att göra en testsida för att testa olika tids- och datumfunktioner så att jag
+hade det klart när jag började med uppgiften. Så resultatet blev en array of arrays av en månadskalender. Det var rätt skönt att ha koll på det innan jag började med att göra klasstrukturen. Så basen i projektet
+är väl objektet CalenderDay som håller all information om en kalenderdag. Hela kalendern är en array av Kalenderdagar. Inte svårare än så. Men för att pumpa ut html:n på sidan har jag gjort en HtmlCalendar som
+ärver Calendar och gör html-renderingen från basobjektet. En tanke skulle kunna extenda Calender som t.ex. en JSONCalendar eller en XmlCalendar som outputtar kalenderdatat i respektive data.
+Sen själva arbetet var väl inte helt lätt, men gick bra till slut. De största problemen hade jag väl att få rätt med föregående månad och nästa månad blev rätt. Det uppkom en liten bugg under arbetets gång
+som jag fixade under utvecklingen. Annnars tog ju stylingen av html/css en del tid, och är väl inte alltid så lätt som man tror, speciellt om man försöker få det någorlunda tjusigt. Hoppas det blev rätt bra,
+design kan ju vara rätt subjektivt; men relativt nöjd av resultate är jag nog trots allt. Sen tog det en stund att fixa bilder till månadens babe och redigera dessa i Photoshop. Själv tycker jag att jag valde
+rätt tjusiga damer. Iaf enligt personlig preferens. Sen hade jag lite problem med uppladdningen med Filezilla, fick ladda om det några gånger till, en katalog i taget och då funkade det bra. Sen fick jag också
+ fixa till url:en på bilderna som inte syntes, men det fixade jag med. Alltsammmans blev en ny <a href="https://github.com/markopo/mapo/commits/manadens-babe">branch på mitt github-konto</a>. Sedan mergade jag ihop
+den med master-branchen. Annars känner jag mig nöjd över resultatet.
+</p>
+
+<h2>KMOM01 - Kom igång med PHP</h2>
+<h4>Hej allihopa!</h4>
 <p><b>Jag</b> heter Marko Poikkimäki och är 38 år gammal och bor i Göteborg. Jag har fru och två barn. På fritiden gillar jag att motionera lite blandat med styrke- och konditionsträning i allmänhet
 och så tränar jag karate regelbundet. På dagarna jobbar jag som .NET utvecklare. Detta har jag gjort sedan jag gick klart en ky-utbildning till Systemutvecklare .NET år 2008. Men efter att ha jobbat ett antal år med Windows-plattformen vill jag bredda min kompetens till open-source världen. Därför läser jag det här PHP-kurspaketet för att lära mig
 PHP ordentligt.</p>
