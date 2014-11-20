@@ -67,8 +67,10 @@ class Calendar {
 
 
     public function getMonthBabe($month) {
-        $monthName = date("M", mktime(0, 0, 0, $month, 1, $this->currentYear));
-        return "img/babes/$monthName.jpg";
+        $monthName = strtolower(date("M", mktime(0, 0, 0, $month, 1, $this->currentYear)));
+        $host = "http://".$_SERVER['HTTP_HOST'];
+        $url = pathinfo($_SERVER["PHP_SELF"])["dirname"];
+        return "$host$url/img/babes/$monthName.jpg";
     }
 
     public function getCalendar($year, $month){
