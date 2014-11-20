@@ -69,7 +69,7 @@ $mapo['navmenu'] = array(
     'items' => array(
     'me' => array('text' => 'Me', 'url' => 'me.php', 'class'=>null),
     'source' => array('text' => 'Source', 'url' => 'source.php', 'class'=>null),
-    'calendar' => array('text' => 'Calendar', 'url' => 'calendar.php', 'class'=>null)
+    'manadens_babe' => array('text' => 'Kalender', 'url' => 'manadens_babe.php', 'class'=>null)
     )
 );
 
