@@ -77,10 +77,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="me.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="me.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webroot/me.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46618357" vertical-offset="277" max-vertical-offset="1462">
+            <state vertical-scroll-proportion="-14.846154" vertical-offset="277" max-vertical-offset="1462">
               <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
               <folding>
                 <marker date="1416505845215" expanded="true" signature="273:320" placeholder="..." />
@@ -105,13 +105,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HtmlCalendar.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HtmlCalendar.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/HtmlCalendar/HtmlCalendar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-26.153847" vertical-offset="595" max-vertical-offset="1717">
-              <caret line="80" column="89" selection-start-line="80" selection-start-column="89" selection-end-line="80" selection-end-column="89" />
+            <state vertical-scroll-proportion="0.28299645" vertical-offset="340" max-vertical-offset="1717">
+              <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
               <folding>
-                <marker date="1416495185347" expanded="true" signature="805:920" placeholder="..." />
+                <marker date="1416506444417" expanded="true" signature="805:923" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -168,11 +168,11 @@
         <option value="$PROJECT_DIR$/src/Template/Template.php" />
         <option value="$PROJECT_DIR$/webroot/config.php" />
         <option value="$PROJECT_DIR$/webroot/manadens_babe.php" />
-        <option value="$PROJECT_DIR$/src/HtmlCalendar/HtmlCalendar.php" />
         <option value="$PROJECT_DIR$/src/CalendarDay/CalendarDay.php" />
         <option value="$PROJECT_DIR$/src/Calendar/Calendar.php" />
         <option value="$PROJECT_DIR$/webroot/css/babes.css" />
         <option value="$PROJECT_DIR$/webroot/me.php" />
+        <option value="$PROJECT_DIR$/src/HtmlCalendar/HtmlCalendar.php" />
       </list>
     </option>
   </component>
@@ -779,16 +779,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/HtmlCalendar/HtmlCalendar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-26.153847" vertical-offset="595" max-vertical-offset="1717">
-          <caret line="80" column="89" selection-start-line="80" selection-start-column="89" selection-end-line="80" selection-end-column="89" />
-          <folding>
-            <marker date="1416495185347" expanded="true" signature="805:920" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/theme/render.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.02021403" vertical-offset="0" max-vertical-offset="841">
@@ -839,7 +829,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webroot/me.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46618357" vertical-offset="277" max-vertical-offset="1462">
+        <state vertical-scroll-proportion="-14.846154" vertical-offset="277" max-vertical-offset="1462">
           <caret line="39" column="68" selection-start-line="39" selection-start-column="68" selection-end-line="39" selection-end-column="68" />
           <folding>
             <marker date="1416505845215" expanded="true" signature="273:320" placeholder="..." />
@@ -849,6 +839,16 @@
             <marker date="1416505845215" expanded="true" signature="3191:3756" placeholder="..." />
             <marker date="1416505845215" expanded="true" signature="3934:4194" placeholder="..." />
             <marker date="1416505845215" expanded="true" signature="4198:4978" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/HtmlCalendar/HtmlCalendar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28299645" vertical-offset="340" max-vertical-offset="1717">
+          <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
+          <folding>
+            <marker date="1416506444417" expanded="true" signature="805:923" placeholder="..." />
           </folding>
         </state>
       </provider>

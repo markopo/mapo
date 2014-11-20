@@ -36,8 +36,8 @@ class HtmlCalendar extends Calendar {
         $nextUrl = "$page?year=$nextYear&month=$nextMonth";
 
         return "<div class='calendar-navigation'>
-                <a href='$prevUrl'>Previous</a>
-                <a href='$nextUrl'>Next</a>
+                <a href='$prevUrl'>Föregående</a>
+                <a href='$nextUrl'>Nästa</a>
                 </div>";
     }
 
