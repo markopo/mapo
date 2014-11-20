@@ -8,16 +8,15 @@
 
 class Calendar {
 
-    CONST ROWS = 35;
 
     private $SwedishMonthNames = array("Jan"=>"Januari","Feb"=>"Februrari","Mar"=>"Mars","Apr"=>"April","May"=>"Maj","Jun"=>"Juni","Jul"=>"Juli","Aug"=>"Augusti","Sep"=>"September","Oct"=>"Oktober","Nov"=>"November","Dec"=>"December");
     private $SwedishDayNames = array("Mon"=>"Måndag", "Tue"=>"Tisdag", "Wed"=>"Onsdag", "Thu"=>"Torsdag", "Fri"=>"Fredag", "Sat"=>"Lördag", "Sun"=>"Söndag");
 
 
-    private $currentYear;
-    private $currentMonth;
-    private $currentDay;
-    private $currentWeek;
+    public $currentYear;
+    public $currentMonth;
+    public $currentDay;
+    public $currentWeek;
 
     private $CalendarDays;
 
@@ -40,7 +39,7 @@ class Calendar {
         $dayname = date("D", mktime(0, 0, 0, $month, $day, $year));
         $week = date("W", mktime(0, 0, 0, $month, $day, $year));
 
-        return new CalendarDay($year, $month, $day, $this->SwedishDayNames[$dayname], "", $week, $iscurrentMonth);
+        return new CalendarDay($year, $month, $day, $this->SwedishDayNames[$dayname], $week, $iscurrentMonth);
     }
 
     private function firstIndexOfDayInMonth($year, $month, $day) {
@@ -57,11 +56,6 @@ class Calendar {
         return $daysPrevMonth;
     }
 
-    private function getDaysOfNextMonth($year, $month, $firstday){
-
-
-    }
-
     private function getDaysInMonth($year, $month){
         return (int)date('t', mktime(0, 0, 0, $month, 1, $year));
     }
@@ -73,8 +67,8 @@ class Calendar {
 
 
     public function getMonthBabe($month) {
-
-
+        $monthName = date("M", mktime(0, 0, 0, $month, 1, $this->currentYear));
+        return "img/babes/$monthName.jpg";
     }
 
     public function getCalendar($year, $month){
@@ -87,34 +81,31 @@ class Calendar {
             $month = $this->currentMonth;
         }
 
-
         // PREVIOUS MONTH DAYS IN FIRST ROW
         $firstDay = $this->firstIndexOfDayInMonth($year, $month, 1);
         if($firstDay > 0){
             $prevMonth = $month-1;
+            $prevYear = $year;
 
             if($prevMonth < 1){
-                $year -= 1;
+                $prevYear -= 1;
             }
 
-            $daysOfPrevMonth = $this->getDaysOfPreviousMonth($year, $prevMonth, $firstDay);
+            $daysOfPrevMonth = $this->getDaysOfPreviousMonth($prevYear, $prevMonth, $firstDay);
 
             for($i=0;$i<$firstDay;$i++){
-
-                array_push($this->CalendarDays, $this->createDate($year, $prevMonth, $daysOfPrevMonth[$i], false));
-
+                array_push($this->CalendarDays, $this->createDate($prevYear, $prevMonth, $daysOfPrevMonth[$i], false));
             }
         }
 
         $daysInMonth = $this->getDaysInMonth($year, $month);
-        $rowDiff = Calendar::ROWS - $firstDay;
 
         for($d=1;$d<$daysInMonth+1;$d++){
             array_push($this->CalendarDays, $this->createDate($year, $month, $d, true));
         }
 
         // NEXT MONTH DAYS
-        $nextMonth = $rowDiff - $daysInMonth;
+        $nextMonth = abs(count($this->CalendarDays) % 7 - 7);
         if($nextMonth > 0){
             $month += 1;
 
@@ -124,7 +115,7 @@ class Calendar {
             }
 
             for($n=1;$n<$nextMonth+1;$n++) {
-                array_push($this->CalendarDays, $this->createDate($year, $month, $n, true));
+                array_push($this->CalendarDays, $this->createDate($year, $month, $n, false));
             }
         }
 

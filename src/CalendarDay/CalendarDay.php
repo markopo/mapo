@@ -14,19 +14,23 @@ class CalendarDay {
 
      public $DayName;
 
-     public $NameDay;
+
 
      public $Week;
 
+     public $IsSunday;
+
      public $IsOnMonth;
 
-     public function __construct($year, $month, $day, $dayname, $nameday, $week, $isonmonth){
+     public function __construct($year, $month, $day, $dayname, $week, $isonmonth){
         $this->Year = $year;
         $this->Month = $month;
         $this->Day = $day;
         $this->DayName = $dayname;
-        $this->NameDay = $nameday;
         $this->Week = $week;
+        $this->IsSunday = $dayname == "Söndag" ? true : false;
+
+
         $this->IsOnMonth = $isonmonth;
      }
 
