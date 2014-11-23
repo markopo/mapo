@@ -20,6 +20,8 @@ $url = pathinfo($_SERVER["PHP_SELF"])["dirname"];
 $sqlPath = "$host$url/files/sql-script.sql";
 $sqlCodeContents = file_get_contents($sqlPath, true);
 
+$sqlImagePath = "$host$url/img/mysql-cli.jpg";
+
 $mapo['main'] = <<< TEMPLATE
 <div class="banner">
     <ul>
@@ -33,6 +35,8 @@ $mapo['main'] = <<< TEMPLATE
 inriktning databasdesign, så där läste vi flera databaskurser om just SQL Server, sen hade vi en kurs om Oracle med psql och ett moment om MySql också. Men bäst kan jag väl Sql Server följt av
 MySql. Annars är jag väl också någorlunda bekant med MS Access också, och nu gick vi igenom SQLite i förra kursen också, så den kan man ju en del om också.
 </p>
+<img src="$sqlImagePath" alt="mysql cli" >
+<br style="clear:both;" >
 <h4><a href="http://dbwebb.se/kunskap/bth-s-labbmiljo-for-databasen-mysql">Kom igång med databasen MySQL och dess klienter</a></h4>
 <p>De här klienterna var jag bekant med sedan tidigare, hade ju de redan installerade på min dator. Så det var väl inget nytt för mig.
 </p>
@@ -45,7 +49,7 @@ Jag kopplade upp mig emot bth:s server med MySql Workbench. Föredrar den framf�
 Det var bra repetition med SQL-uppgiften. Det som kändes kanske lite obekant var att göra vyer i MySql. Annars var allt bekant sedan tidigare.
 Annars känner jag mig obekväm med att anropa massor av vyer från andra vyer. Då får man massor av nästlade relationer till varandra och när en vy
 ändras så kanske nästa kraschar. Och sen kanske prestandan inte blir det bästa heller. Överlag kan det bli en jäkla nästlad soppa av det tänker jag mig. Sådant beror väl på iofs,
-om man kanske dokumenterar det. 
+om man kanske dokumenterar det.
 </p>
 <h4><a href="javascript:showSqlCode();" >Se sql koden för uppgiften</a></h4>
 <div id="sql-code-container" style="display:none;" >
