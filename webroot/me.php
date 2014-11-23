@@ -15,6 +15,11 @@ for($i=1;$i<16;$i++){
   $imageSlider .= "<li><img src='img/ibiza{$i}.jpg' alt='ibiza' ></li>";
 }
 
+$host = "http://".$_SERVER['HTTP_HOST'];
+$url = pathinfo($_SERVER["PHP_SELF"])["dirname"];
+$sqlPath = "$host$url/files/sql-script.sql";
+$sqlCodeContents = file_get_contents($sqlPath, true);
+
 $mapo['main'] = <<< TEMPLATE
 <div class="banner">
     <ul>
@@ -22,6 +27,33 @@ $mapo['main'] = <<< TEMPLATE
     </ul>
 </div>
 <div>
+<h2>KMOM03 - SQL och databasen MySql</h2>
+<p> Jag har väl en ganska bra kunskap om SQL och databaser sen innan och har jobbat en hel del med databaser och kan en hel del om dessa. Mest med SQL Server och T-SQL som
+är microsofts implementation av SQL-språket. Jag har skrivit massor av lagrade procedurer, vyer, triggrar, osv i det. Tidigare i mitt liv pluggade jag en ky-utbildning - Systemutvecklare .NET
+inriktning databasdesign, så där läste vi flera databaskurser om just SQL Server, sen hade vi en kurs om Oracle med psql och ett moment om MySql också. Men bäst kan jag väl Sql Server följt av
+MySql. Annars är jag väl också någorlunda bekant med MS Access också, och nu gick vi igenom SQLite i förra kursen också, så den kan man ju en del om också.
+</p>
+<h4><a href="http://dbwebb.se/kunskap/bth-s-labbmiljo-for-databasen-mysql">Kom igång med databasen MySQL och dess klienter</a></h4>
+<p>De här klienterna var jag bekant med sedan tidigare, hade ju de redan installerade på min dator. Så det var väl inget nytt för mig.
+</p>
+<h4><a href="http://dbwebb.se/kunskap/kom-igang-med-databasen-mysql-och-dess-klienter">BTH's labbmiljö för databasen MySQL</a></h4>
+<p>
+Jag kopplade upp mig emot bth:s server med MySql Workbench. Föredrar den framför PhpMyAdmin.
+</p>
+<h4><a href="http://dbwebb.se/uppgift/kom-igang-med-sql">Kom igång med SQL</a></h4>
+<p>
+Det var bra repetition med SQL-uppgiften. Det som kändes kanske lite obekant var att göra vyer i MySql. Annars var allt bekant sedan tidigare.
+Annars känner jag mig obekväm med att anropa massor av vyer från andra vyer. Då får man massor av nästlade relationer till varandra och när en vy
+ändras så kanske nästa kraschar. Och sen kanske prestandan inte blir det bästa heller. Överlag kan det bli en jäkla nästlad soppa av det tänker jag mig. Sådant beror väl på iofs,
+om man kanske dokumenterar det. 
+</p>
+<h4><a href="javascript:showSqlCode();" >Se sql koden för uppgiften</a></h4>
+<div id="sql-code-container" style="display:none;" >
+<pre><code>
+$sqlCodeContents
+</code></pre>
+</div>
+
 <h2>KMOM02 - Objektorienterad programmering i PHP</h2>
 <p>Jag har väl rätt goda kunskaper i objektorienterad programmering, jag jobbar ju dagligen med objektorienterad programmering i C# mestadels med ASP.NET MVC. Tycker väl att jag kan det rätt
 bra, men allt kan jag nog inte ändå. Det finns nog en del saker som man inte har koll på. Men det är klart det är en liten omställning att skriva objektorienterat i PHP. Iofs har jag gjort det innan
@@ -68,6 +100,11 @@ gärna återanvända saker därifrån.
 TEMPLATE;
 
 $mapo["pagescript"] = <<< TEMPLATE
+
+    function showSqlCode() {
+        $('#sql-code-container').slideToggle();
+    }
+
     $(function() {
         $('.banner').unslider({ speed: 500, delay: 3000 });
     });
