@@ -35,6 +35,15 @@ include(MAPO_INSTALL_PATH. '/src/bootstrap.php');
 session_name(preg_replace('/[^a-z\d]/i', '', __DIR__));
 session_start();
 
+/** Sorting */
+if(!isset($_SESSION["sort_title"])){
+    $_SESSION["sort_title"] = "ASC";
+}
+
+if(!isset($_SESSION["sort_year"])){
+    $_SESSION["sort_year"] = "ASC";
+}
+
 
 /**
  * Create the mapo variable.
@@ -55,7 +64,7 @@ $mapo['title_append'] = ' | mapo en webbtemplate';
  * Theme related settings.
  *
  */
-$mapo['stylesheets'] = array('css/style.css', 'css/babes.css');
+$mapo['stylesheets'] = array('css/style.css', 'css/babes.css', 'css/movies.css', 'css/forms.css');
 $mapo['favicon']    = 'mapo.png';
 
 
@@ -69,7 +78,8 @@ $mapo['navmenu'] = array(
     'items' => array(
     'me' => array('text' => 'Me', 'url' => 'me.php', 'class'=>null),
     'source' => array('text' => 'Source', 'url' => 'source.php', 'class'=>null),
-    'manadens_babe' => array('text' => 'Kalender', 'url' => 'manadens_babe.php', 'class'=>null)
+    'manadens_babe' => array('text' => 'Kalender', 'url' => 'manadens_babe.php', 'class'=>null),
+    'movies' => array('text' => 'Movies', 'url' => 'movies.php', 'class'=>null)
     )
 );
 
@@ -87,3 +97,22 @@ $mapo['javascript_include'] = array('js/main.js', 'js/unslider.min.js');
  *
  */
 $mapo['google_analytics'] = null;
+
+
+/**
+ * Settings for the database.
+ *
+ */
+if($_SERVER['HTTP_HOST'] == 'localhost:8080' || $_SERVER['HTTP_HOST'] == '127.0.0.1:8080') {
+    $mapo['database']['dsn'] = 'mysql:host=localhost;dbname=Movie;';
+    $mapo['database']['username'] = 'root';
+    $mapo['database']['password'] = 'paska';
+}
+else {
+    $mapo['database']['dsn'] = 'mysql:host=blu-ray.student.bth.se;dbname=mapn14;';
+    $mapo['database']['username'] = 'mapn14';
+    $mapo['database']['password'] = 'vrh;Tf{2';
+}
+
+
+$mapo['database']['driver_options'] = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");

@@ -29,6 +29,24 @@ $mapo['main'] = <<< TEMPLATE
     </ul>
 </div>
 <div>
+<h2>KMOM04 - PDO och MySql</h2>
+<ul>
+<li> http://stackoverflow.com/questions/10302615/mysql-views-performance </li>
+<li> http://stackoverflow.com/questions/4426919/mysql-views-vs-php-query</li>
+<li> http://stackoverflow.com/questions/4886874/are-mysql-views-dynamic-and-efficient</li>
+<li> http://stackoverflow.com/questions/439056/is-a-view-faster-than-a-simple-query</li>
+<li> http://www.hackvalue.nl/en/article/116/next_step_mysql_using_views_to_improve_performance</li>
+<li> http://www.ovaistariq.net/667/mysql-using-views-as-performance-improvement-tools/#.VIYY-cnLJJQ</li>
+<li> http://dba.stackexchange.com/questions/16372/when-to-use-views-in-mysql</li>
+<li>http://www.percona.com/blog/2007/08/12/mysql-view-as-performance-troublemaker/</li>
+<li></li>
+<li></li>
+</ul>>
+<p>MERGE ALGORITHM
+
+
+</p>
+
 <h2>KMOM03 - SQL och databasen MySql</h2>
 <p> Jag har väl en ganska bra kunskap om SQL och databaser sen innan och har jobbat en hel del med databaser och kan en hel del om dessa. Mest med SQL Server och T-SQL som
 är microsofts implementation av SQL-språket. Jag har skrivit massor av lagrade procedurer, vyer, triggrar, osv i det. Tidigare i mitt liv pluggade jag en ky-utbildning - Systemutvecklare .NET

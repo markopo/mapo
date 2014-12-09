@@ -1,0 +1,86 @@
+.movies-wrapper h2 {
+    font-size: 32px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #333333;
+    padding: 0px 0 5px 0;
+}
+
+.search-list {
+    margin: 0;
+    padding: 0;
+    width: 960px;
+    background: #fafafa;
+    border-radius: 2px;
+}
+
+.search-list td {
+    padding: 5px 0;
+}
+
+.search-list td:first-child {
+    width: 170px;
+}
+
+.search-list label, .search-list a {
+    margin: 0 5px;
+}
+
+.search-list input[type='text'] {
+    width: 150px;
+}
+
+.search-list input[type='submit'] {
+    width: 100px;
+}
+
+.search-result th, .search-result td {
+    padding: 3px 12px;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #333;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+}
+
+.search-result .sort-links {
+    position: relative;
+}
+
+.search-result .arrow-down, .search-result .arrow-up {
+    position: absolute;
+    top: 7px;
+    margin: 0 7px;
+}
+
+a.genres-links {
+    color: #366097;
+    font-weight: normal;
+}
+
+a.genres-links.selected {
+    color: #0d3349;
+    font-weight: bold;
+}
+
+#sokBtn {
+    padding: 4px 2px;
+    border: 0 none;
+    font-weight: bold;
+    background: #333333;
+    color: #fafafa;
+}
+
+#sokBtn.pending-search {
+    background: #E8768B;
+}
