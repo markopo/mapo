@@ -14,16 +14,18 @@ class HtmlMovies {
         $startyear = Helpers::IsNullOrEmpty($params->startyear);
         $endyear = Helpers::IsNullOrEmpty($params->endyear);
         $genre = Helpers::IsNullOrEmpty($params->genre);
-        $ordertitle = Helpers::IsNullOrEmpty($params->ordertitle);
-        $orderyear = Helpers::IsNullOrEmpty($params->orderyear);
+        $orderdir = Helpers::IsNullOrEmpty($params->orderdir);
+        $ordercol = Helpers::IsNullOrEmpty($params->ordercol);
+        $hits_per_page = Helpers::IsNullOrEmpty($params->hits_per_page);
+        $page = Helpers::IsNullOrEmpty($params->page);
 
 
         return "<form id='search-form' name='search-form' action='movies.php' method='get' >
         <input type='hidden' id='genre' name='genre' value='$genre' >
-        <input type='hidden' id='order_title' name='order_title' value='$ordertitle' >
-        <input type='hidden' id='order_year' name='order_year' value='$orderyear' >
-        <input type='hidden' id='hits_per_page' name='hits_per_page' value='' >
-        <input type='hidden' id='page' name='page' value='' >
+        <input type='hidden' id='order_dir' name='order_dir' value='$orderdir' >
+        <input type='hidden' id='order_col' name='order_col' value='$ordercol' >
+        <input type='hidden' id='hits_per_page' name='hits_per_page' value='$hits_per_page' >
+        <input type='hidden' id='page' name='page' value='$page' >
         <table class='search-list' >
         <tr>
             <td>
@@ -53,9 +55,11 @@ class HtmlMovies {
         </tr>
         <tr>
              <td>
-                 <input type='submit' id='sokBtn' value='Sök' >
+                 <input class='btn' type='submit' id='sokBtn' value='Sök' >
              </td>
-             <td></td>
+             <td>
+                 <button class='btn'  id='clearBtn' >Rensa</button>
+             </td>
         </tr>
         <tr>
             <td><a href='movies.php?action=visaalla'>Visa alla</a></td>
@@ -64,23 +68,25 @@ class HtmlMovies {
         </table>";
     }
 
-    private static function orderArrow($order){
-        return $order == "ASC" ? "arrow-up" : "arrow-down";
-    }
 
-    public static function SearchTable($res){
+
+    public static function SearchTable($res, $params){
         $html = "";
         if(count($res) > 0) {
             $html .= "<table class='search-result'>";
             $html .= "<thead><tr>";
+            $html .= "<th><a class='sort-links' data-sort='id' data-order='".HtmlMovies::orderDir($params->orderdir, $params->ordercol, "id")."' href='#id'>Id <span class='".HtmlMovies::orderArrow($params->orderdir, $params->ordercol, "id")."'></span></a></th>";
             $html .= "<th>Bild</th>";
-            $html .= "<th><a class='sort-links' data-sort='title' data-order='{$_SESSION["order_title"]}' href='#title'> Titel<span class='".HtmlMovies::orderArrow($_SESSION["order_title"])."'></span></a></th>";
-            $html .= "<th><a class='sort-links' data-sort='year' data-order='{$_SESSION["order_year"]}' href='#YEAR'>År<span class='".HtmlMovies::orderArrow($_SESSION["order_year"])."'></span></a></th>";
+            $html .= "<th><a class='sort-links' data-sort='title' data-order='".HtmlMovies::orderDir($params->orderdir, $params->ordercol, "title")."' href='#title'> Titel<span class='".HtmlMovies::orderArrow($params->orderdir, $params->ordercol, "title")."'></span></a></th>";
+            $html .= "<th><a class='sort-links' data-sort='year' data-order='".HtmlMovies::orderDir($params->orderdir, $params->ordercol, "year")."' href='#YEAR'>År<span class='".HtmlMovies::orderArrow($params->orderdir, $params->ordercol, "year")."'></span></a></th>";
             $html .= "<th>Genre</th>";
             $html .= "</tr></thead>";
 
+            $html .= "<tbody>";
+
             foreach ($res as $r) {
                 $html .= "<tr>";
+                $html .= "<td>{$r->id}</td>";
                 $html .= "<td><img src='{$r->image}' alt='{$r->title}' ></td>";
                 $html .= "<td>{$r->title}</td>";
                 $html .= "<td>{$r->YEAR}</td>";
@@ -88,15 +94,19 @@ class HtmlMovies {
                 $html .= "</tr>";
             }
 
+            $html .= "</tbody>";
+
             $html .= "</table>";
         }
         return $html;
     }
 
-    public static function HitsPerPage(){
+    public static function HitsPerPageLinks($selHits){
         $html = "";
+        $html .= "<span>Träffar per sida:</span>";
         for($i=2;$i<=8;$i+=2){
-            $html .= "<a class='hits-per-page' hits-per-page='$i' href='#$i'>$i</a>";
+            $selected = $selHits == $i ? "selected" : "";
+            $html .= "<a class='hits-per-page $selected' hits-per-page='$i' href='#$i'>$i</a>";
         }
         return $html;
     }
@@ -104,9 +114,13 @@ class HtmlMovies {
     public static function PagingLinks($total, $hitsperpage){
         $html = "";
         $count = round($total/$hitsperpage, 0, PHP_ROUND_HALF_UP);
+        $html .= "<a data-page='0' href='#1'>&lt;</a>";
+        $html .= "<a data-page='-1' href='#'>&lt; &lt;</a>";
         for($i=1;$i<$count+1;$i++){
             $html .= "<a data-page='$i' href='#$i'>$i</a>";
         }
+        $html .= "<a data-page='+1' href='#$'>&gt; &gt;</a>";
+        $html .= "<a data-page='$count' href='#$count'> &gt; </a>";
         return $html;
     }
 
@@ -117,11 +131,25 @@ class HtmlMovies {
         if(count($genres) > 0){
             foreach($genres as $g){
                 $selected = $selectedGenre == $g->name ? "selected" : "";
-
                 $html .= "<a  class='genres-links $selected' data-genre='{$g->name}' href='#{$g->name}' >$g->name</a>";
             }
         }
         return $html;
+    }
+
+
+    private static function orderDir($dir, $col, $whichCol){
+        if($col == $whichCol) {
+            return $dir == "ASC" ? "ASC" : "DESC";
+        }
+        return "ASC";
+    }
+
+    private static function orderArrow($dir, $col, $whichCol){
+        if($col == $whichCol) {
+            return $dir == "ASC" ? "arrow-up" : "arrow-down";
+        }
+        return "arrow-down";
     }
 
 } 

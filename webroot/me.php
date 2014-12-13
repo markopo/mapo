@@ -28,24 +28,47 @@ $mapo['main'] = <<< TEMPLATE
         $imageSlider
     </ul>
 </div>
+
 <div>
+
 <h2>KMOM04 - PDO och MySql</h2>
-<ul>
-<li> http://stackoverflow.com/questions/10302615/mysql-views-performance </li>
-<li> http://stackoverflow.com/questions/4426919/mysql-views-vs-php-query</li>
-<li> http://stackoverflow.com/questions/4886874/are-mysql-views-dynamic-and-efficient</li>
-<li> http://stackoverflow.com/questions/439056/is-a-view-faster-than-a-simple-query</li>
-<li> http://www.hackvalue.nl/en/article/116/next_step_mysql_using_views_to_improve_performance</li>
-<li> http://www.ovaistariq.net/667/mysql-using-views-as-performance-improvement-tools/#.VIYY-cnLJJQ</li>
-<li> http://dba.stackexchange.com/questions/16372/when-to-use-views-in-mysql</li>
-<li>http://www.percona.com/blog/2007/08/12/mysql-view-as-performance-troublemaker/</li>
-<li></li>
-<li></li>
-</ul>>
-<p>MERGE ALGORITHM
-
-
+<p>Jag har inte gjort efter övningen rakt av, utan gjort efter eget huvud vad jag tyckte verkade vara bra. För övrigt tycker jag paginering och sortering i dagens läge borde
+skötas av klienten, genom javascript företrädesvis för det är trots allt Webb det här handlar om. Tycker väl att det nästan blir bökigare att bygga så här mycket funktionalitet genom
+en helt serverbaserad lösning som tämligen klumpig och saknar en hel del i UX. Men men, sånt är livet. Lite javascript har jag skrivit trots allt, bara för att höja användarupplevelsen till
+en slags minsta gräns.
 </p>
+<p>Själva sökfrågan ligger i en klass <i>CDatabase</i> i en metod <i>GetMovies</i>. Jag har använt mig StdClass som är ett anonymt objekt i PHP istället för en array. Det är väl inte så stor
+skillnad, utan mer ett tycke om man tycker mer om objekt eller arrayer. Metoden bygger upp en dynamisk sql-sträng på vyn movies baserat på parametrarna in i metoden, men jag använder <a href="http://php.net/manual/en/pdostatement.bindparam.php">bindParam</a>
+från PDO som jag tycker är bra.
+Det är en vanlig klass som man måste instansiera upp med publika metoder för att få tag i olika data som man behöver. Andra klasser som <i>Helpers</i> klassen och <i>HtmlMovies</i> har jag lämnat
+dess metoder som <b>public static</b> för att slippa skapa en instans av dem och för att de mer agerar som utility funktioner.
+</p>
+<p><strong> MERGE vs TEMPTABLE ALGORITHM </strong> - Om man skall definiera en vy skall man försöka använda sig av MERGE algoritmen istället för TEMPTABLE som isf
+gör en table-scan av tabellen. Med MERGE kommer den optimera vyn att fungera som en vanlig sql-fråga istället. Annars kan man lämna den UNDEFINED vilket den är per default och försöker
+då växla till den som är mest optimal för just den servern som databasen befinner sig på.
+Annars är det ju en generell regel inom SQL att minimera antalet kolumner som vyn hämtar, hämta bara de som behövs. Exkludera de som inte behövs - allt för prestandan. Men vyer är ändå kraftfullt
+och en av fördelarna är att de kapslar in komplicerad sql i ett lättåtkomligt anrop, vilket leder till mindre sqlsträngar i webbapplikationen, vilket är ett vanligt fel i sql-baserade webbapplikationer.
+</p>
+<h5><a href="javascript:toggleMySqlViews();" >Lite länkar om vyer i mysql</a></h5>
+<ul id="mysql-list" style="display:none;" >
+<li>http://stackoverflow.com/questions/10302615/mysql-views-performance </li>
+<li>http://stackoverflow.com/questions/4426919/mysql-views-vs-php-query</li>
+<li>http://stackoverflow.com/questions/4886874/are-mysql-views-dynamic-and-efficient</li>
+<li>http://stackoverflow.com/questions/439056/is-a-view-faster-than-a-simple-query</li>
+<li>http://www.hackvalue.nl/en/article/116/next_step_mysql_using_views_to_improve_performance</li>
+<li>http://www.ovaistariq.net/667/mysql-using-views-as-performance-improvement-tools/#.VIYY-cnLJJQ</li>
+<li>http://dba.stackexchange.com/questions/16372/when-to-use-views-in-mysql</li>
+<li>http://www.percona.com/blog/2007/08/12/mysql-view-as-performance-troublemaker/</li>
+</ul>
+<p><strong>Kodnings standard</strong>
+Jag har försökt ha en slags kodstandard i min kod, för att hålla kodbasen tydlig och förutsägbar. Ganska enkla regler, men som gör säkert stor skillnad i längden.
+</p>
+<ul>
+<li>Max 3 input parametrar in i en funktion, annars gör man en klass eller en array av det.</li>
+<li>Gruppera public och private properties och metoder var för sig för överskådlighet.</li>
+<li>Separera klasser och metoder från dataaccess och rendering av html.</li>
+</ul>
+
 
 <h2>KMOM03 - SQL och databasen MySql</h2>
 <p> Jag har väl en ganska bra kunskap om SQL och databaser sen innan och har jobbat en hel del med databaser och kan en hel del om dessa. Mest med SQL Server och T-SQL som
@@ -125,6 +148,10 @@ $mapo["pagescript"] = <<< TEMPLATE
 
     function showSqlCode() {
         $('#sql-code-container').slideToggle();
+    }
+
+    function toggleMySqlViews(){
+        $('#mysql-list').slideToggle();
     }
 
     $(function() {

@@ -12,9 +12,11 @@ $error = "";
 $params = new StdClass();
 
 /** image */
+/*
 $host = "http://".$_SERVER['HTTP_HOST'];
 $url = pathinfo($_SERVER["PHP_SELF"])["dirname"];
 $ucUrl = "$host$url/img/uc.png";
+*/
 /* end image */
 
 /** START DB instance */
@@ -31,19 +33,32 @@ if(isset($_GET["action"]) && $_GET["action"] == "showall"){
     $params->startyear = null;
     $params->endyear = null;
     $params->genre = null;
-    $params->ordertitle = null;
-    $params->orderyear = null;
+    $params->orderdir = null;
+    $params->ordercol = null;
+    $params->hits_per_page = 2;
+    $params->page = 0;
 }
 else {
     $params->title = Helpers::GetIsSetOrNull("titel");
     $params->startyear = Helpers::GetIsSetOrNull("startyear");
     $params->endyear = Helpers::GetIsSetOrNull("endyear");
     $params->genre = Helpers::GetIsSetOrNull("genre");
-    $params->ordertitle = Helpers::GetIsSetOrNull("order_title");
-    $params->orderyear = Helpers::GetIsSetOrNull("order_year");
+    $params->orderdir = Helpers::GetIsSetOrNull("order_dir");
+    $params->ordercol = Helpers::GetIsSetOrNull("order_col");
+    $params->hits_per_page = Helpers::GetIsSetOrNull("hits_per_page");
+    $params->page = Helpers::GetIsSetOrNull("page");
 
-    $_SESSION["order_title"] = $params->ordertitle == "ASC" ? "ASC" : "DESC";
-    $_SESSION["order_year"] = $params->orderyear == "ASC" ? "ASC" : "DESC";
+    if($params->hits_per_page == null){
+        $params->hits_per_page = 2;
+    }
+
+    if($params->page == null){
+        $params->page = 0;
+    }
+
+
+    /** @var  orderdir */
+    $params->orderdir = $params->orderdir == "ASC" ? "ASC" : "DESC";
 }
 
 /**
@@ -56,22 +71,16 @@ $params->genre = Helpers::HasGenre($genres, $params->genre);
     */
 $htmlGenres = HtmlMovies::GenresLinks($genres, $params->genre);
 
-echo var_dump($params);
-
-
+// echo var_dump($params);
 
 $res = $db->GetMovies($params);
+$moviesCount = $db->GetMoviesCount();
 
-$debugMessage = $db->debugMessage;
-
-
-if(!empty($db->errorMessage)) {
-    $error = $db->errorMessage;
-}
 
 $searchForm = HtmlMovies::SearchForm($htmlGenres, $params);
-$htmlTable = HtmlMovies::SearchTable($res);
-
+$hitsPerPageLinks = HtmlMovies::HitsPerPageLinks((int)$params->hits_per_page);
+$htmlTable = HtmlMovies::SearchTable($res, $params);
+$pagingLinks = HtmlMovies::PagingLinks($moviesCount, (int)$params->hits_per_page);
 
 
 $mapo['main'] = "<div class='movies-wrapper'>
@@ -81,11 +90,16 @@ $searchForm
 </div>
 <br style='clear:both;' >
 <div class='htmltable-wrapper'>
+<div class='hitsperpage-wrapper' >
+$hitsPerPageLinks
+</div>
+<br style='clear:both;' />
 $htmlTable
 </div>
-<p>$error</p>
-<p>$debugMessage</p>
-<p><img src='$ucUrl' alt='under construction' ></p>
+<div class='paging-links-wrapper'>
+$pagingLinks
+</div>
+<br style='clear:both;' />
 </div>
 ";
 

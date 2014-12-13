@@ -14,9 +14,6 @@ class CDatabase {
     private $options;                   // Options used when creating the PDO object
     private $db   = null;               // The PDO object
     private $stmt = null;               // The latest statement used to execute a query
-    private static $numQueries = 0;     // Count all queries made
-    private static $queries = array();  // Save all queries for debugging purpose
-    private static $params = array();   // Save all parameters for debugging purpose
 
     private $debug;
 
@@ -39,8 +36,6 @@ class CDatabase {
             $this->db = new PDO($this->options['dsn'], $this->options['username'], $this->options['password'], $this->options['driver_options']);
         }
         catch(Exception $e) {
-            //throw $e; // For debug purpose, shows all connection details
-        //    $this->errorMessage = $e->getCode()." ".$e->getMessage();
             throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
         }
 
@@ -70,7 +65,24 @@ class CDatabase {
          return $this->stmt->fetchAll();
      }
 
-
+    /**
+     * Execute a select-query with movies count.
+     *
+     * @return count of movies.
+     */
+    public function GetMoviesCount() {
+        try {
+            $sql = "SELECT COUNT(id) as antal FROM `vmovie`";
+            $this->stmt = $this->db->prepare($sql);
+            $this->stmt->execute();
+            $res = $this->stmt->fetch();
+        }
+        catch (PDOException $e)
+        {
+            $this->errorMessage = __METHOD__. ": ".$e->getMessage();
+        }
+        return $res->antal;
+    }
 
 
     /**
@@ -81,13 +93,13 @@ class CDatabase {
      */
     public function GetMovies($params) {
 
-         /*
-        self::$queries[] = $query;
-        self::$params[]  = $params;
-        self::$numQueries++;
-        */
+        $ordercol = null;
+        $orderdir = null;
 
-        $sql = "SELECT image, title, genre, image, YEAR FROM `vmovie` ";
+        $hitsperpage = null;
+        $page = null;
+
+        $sql = "SELECT id, image, title, genre, image, YEAR FROM `vmovie` ";
 
 
         if($params->title != null){
@@ -113,28 +125,23 @@ class CDatabase {
             $sql .= "year <= :endyear ";
         }
 
-
-        if($params->ordertitle != null){
-            $titleorder = $params->ordertitle == "ASC" ? "ASC" : "DESC";
-            $sql .= "ORDER BY title ".$titleorder;
+        if($params->ordercol != null && $params->orderdir != null){
+            $ordercol = in_array($params->ordercol, array("title", "year", "id")) ? $params->ordercol : "id";
+            $orderdir = $params->orderdir == "ASC" ? "ASC" : "DESC";
+            $sql .= "ORDER BY :ordercol :orderdir ";
         }
 
-        if($params->orderyear != null){
-            $yearorder = $params->orderyear == "ASC" ? "ASC" : "DESC";
-            if($this->HasOrderByInSql($sql) == true){
-                $sql .= ", YEAR ".$yearorder;
+        if($params->hits_per_page != null && $params->page != null){
+            $hitsperpage = (int)$params->hits_per_page;
+            $page =  (int)$params->page;
+
+            $sql .= "LIMIT :hitsperpage ";
+
+            if($page > 1){
+                $page = $hitsperpage * ($page-1);
+                $sql .= "OFFSET :page ";
             }
-            else {
-                $sql .= "ORDER BY YEAR ".$yearorder;
-            }
 
-        }
-
-
-
-        /** DEBUG INFO */
-        if($this->debug == true) {
-            $this->debugMessage = "<p>Query = <br/><pre>{$sql}</pre></p></p>";
         }
 
         try {
@@ -165,6 +172,21 @@ class CDatabase {
                 $this->stmt->bindParam(":endyear", $params->endyear);
             }
 
+            // ORDER
+            if($ordercol != null && $orderdir != null){
+                $this->stmt->bindParam(":ordercol", $ordercol);
+                $this->stmt->bindParam(":orderdir", $orderdir);
+            }
+
+            // PAGING
+            if($hitsperpage != null && $page != null) {
+                $this->stmt->bindParam(":hitsperpage", $hitsperpage, PDO::PARAM_INT);
+
+                if($page > 1) {
+                    $this->stmt->bindParam(":page", $page, PDO::PARAM_INT);
+                }
+            }
+
             $this->stmt->execute();
 
         }
@@ -172,42 +194,20 @@ class CDatabase {
         {
           $this->errorMessage = __METHOD__. ": ".$e->getMessage();
 
+
         }
         return $this->stmt->fetchAll();
     }
 
-    /**
-     * Get a html representation of all queries made, for debugging and analysing purpose.
-     *
-     * @return string with html.
-     */
-    /*
-    public function Dump() {
-        $html  = '<p><i>You have made ' . self::$numQueries . ' database queries.</i></p><pre>';
-        foreach(self::$queries as $key => $val) {
-            $params = empty(self::$params[$key]) ? null : htmlentities(print_r(self::$params[$key], 1)) . '<br/></br>';
-            $html .= $val . '<br/></br>' . $params;
+
+    private function HasWhereInSql($sql){
+        if(strpos($sql, "WHERE") == false){
+            $sql .= "WHERE ";
         }
-        return $html . '</pre>';
+        else {
+            $sql .= "AND ";
+        }
+        return $sql;
     }
-    */
-
-        private function HasOrderByInSql($sql){
-            if(strpos($sql, "ORDER BY") == false){
-                return false;
-            }
-            return true;
-        }
-
-
-        private function HasWhereInSql($sql){
-            if(strpos($sql, "WHERE") == false){
-                $sql .= "WHERE ";
-            }
-            else {
-                $sql .= "AND ";
-            }
-            return $sql;
-        }
 
 } 

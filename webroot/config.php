@@ -36,6 +36,10 @@ session_name(preg_replace('/[^a-z\d]/i', '', __DIR__));
 session_start();
 
 /** Sorting */
+if(!isset($_SESSION["sort_id"])){
+    $_SESSION["sort_id"] = "ASC";
+}
+
 if(!isset($_SESSION["sort_title"])){
     $_SESSION["sort_title"] = "ASC";
 }

@@ -16,6 +16,14 @@ body {
     padding: 0;
 }
 
+a {  color: #366097; }
+a:hover { color: #0d3349; }
+
+a.selected {
+    color: #0d3349;
+    font-weight: bold;
+}
+
 /* unslider */
 .banner { position: relative; overflow: auto; margin: -10px 0 0 0; padding: 0; }
 .banner ul { margin: 0; padding: 0; width: 960px; }
