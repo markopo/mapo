@@ -11,12 +11,12 @@ CREATE TABLE USER
   password CHAR(32),
   salt INT NOT NULL
 ) ENGINE INNODB CHARACTER SET utf8;
- 
-INSERT INTO USER (acronym, name, salt) VALUES 
+
+INSERT INTO USER (acronym, name, salt) VALUES
   ('doe', 'John/Jane Doe', unix_timestamp()),
   ('admin', 'Administrator', unix_timestamp())
 ;
- 
+
 UPDATE USER SET password = md5(concat('doe', salt)) WHERE acronym = 'doe';
 UPDATE USER SET password = md5(concat('admin', salt)) WHERE acronym = 'admin';
  

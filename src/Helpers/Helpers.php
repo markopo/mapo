@@ -23,6 +23,13 @@ class Helpers {
         return null;
     }
 
+    public static function PostIsSetOrNull($val){
+        if(isset($_POST[$val]) && !empty($_POST[$val])){
+            return Helpers::strip($_POST[$val]);
+        }
+        return null;
+    }
+
     public static function  IsNullOrEmpty($str){
         if($str != null){
             return $str;

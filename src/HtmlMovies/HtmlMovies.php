@@ -111,13 +111,17 @@ class HtmlMovies {
         return $html;
     }
 
-    public static function PagingLinks($total, $hitsperpage){
+    public static function PagingLinks($total, $hitsperpage, $selectedPage){
+
+        $selectedFirst = $selectedPage == 0 ? "selected" : "";
+
         $html = "";
         $count = round($total/$hitsperpage, 0, PHP_ROUND_HALF_UP);
-        $html .= "<a data-page='0' href='#1'>&lt;</a>";
+        $html .= "<a data-page='0' class='$selectedFirst' href='#1'>&lt;</a>";
         $html .= "<a data-page='-1' href='#'>&lt; &lt;</a>";
         for($i=1;$i<$count+1;$i++){
-            $html .= "<a data-page='$i' href='#$i'>$i</a>";
+            $selected = $selectedPage == $i ? "selected" : "";
+            $html .= "<a class='$selected' data-page='$i' href='#$i'>$i</a>";
         }
         $html .= "<a data-page='+1' href='#$'>&gt; &gt;</a>";
         $html .= "<a data-page='$count' href='#$count'> &gt; </a>";

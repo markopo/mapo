@@ -36,7 +36,11 @@ class CDatabase {
             $this->db = new PDO($this->options['dsn'], $this->options['username'], $this->options['password'], $this->options['driver_options']);
         }
         catch(Exception $e) {
+            $error = "class: ".__CLASS__." ,method: ".__METHOD__." ,message:".$e->getMessage();
+            ErrorLog::Write($error);
+
             throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
+
         }
 
         $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']);
@@ -61,6 +65,7 @@ class CDatabase {
          catch (PDOException $e)
          {
              $this->errorMessage = __METHOD__. ": ".$e->getMessage();
+
          }
          return $this->stmt->fetchAll();
      }
@@ -71,6 +76,7 @@ class CDatabase {
      * @return count of movies.
      */
     public function GetMoviesCount() {
+        $res = null;
         try {
             $sql = "SELECT COUNT(id) as antal FROM `vmovie`";
             $this->stmt = $this->db->prepare($sql);
@@ -80,6 +86,7 @@ class CDatabase {
         catch (PDOException $e)
         {
             $this->errorMessage = __METHOD__. ": ".$e->getMessage();
+
         }
         return $res->antal;
     }
@@ -186,6 +193,12 @@ class CDatabase {
                     $this->stmt->bindParam(":page", $page, PDO::PARAM_INT);
                 }
             }
+
+            /** DEBUG INFO */
+            if($this->debug == true) {
+                $this->debugMessage = "<p>Query = <br/><pre>{$sql}</pre></p></p>";
+            }
+
 
             $this->stmt->execute();
 

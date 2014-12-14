@@ -20,7 +20,7 @@ $ucUrl = "$host$url/img/uc.png";
 /* end image */
 
 /** START DB instance */
-$db = new CDatabase($mapo['database'], true);
+$db = new CDatabase($mapo['database']);
 $genres = $db->GetGenres();
 
 //echo var_dump($genres);
@@ -36,7 +36,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "showall"){
     $params->orderdir = null;
     $params->ordercol = null;
     $params->hits_per_page = 2;
-    $params->page = 0;
+    $params->page = 1;
 }
 else {
     $params->title = Helpers::GetIsSetOrNull("titel");
@@ -53,7 +53,7 @@ else {
     }
 
     if($params->page == null){
-        $params->page = 0;
+        $params->page = 1;
     }
 
 
@@ -71,16 +71,17 @@ $params->genre = Helpers::HasGenre($genres, $params->genre);
     */
 $htmlGenres = HtmlMovies::GenresLinks($genres, $params->genre);
 
-// echo var_dump($params);
+//  echo var_dump($params);
 
 $res = $db->GetMovies($params);
 $moviesCount = $db->GetMoviesCount();
 
+$debugMessage = ""; // $db->debugMessage;
 
 $searchForm = HtmlMovies::SearchForm($htmlGenres, $params);
 $hitsPerPageLinks = HtmlMovies::HitsPerPageLinks((int)$params->hits_per_page);
 $htmlTable = HtmlMovies::SearchTable($res, $params);
-$pagingLinks = HtmlMovies::PagingLinks($moviesCount, (int)$params->hits_per_page);
+$pagingLinks = HtmlMovies::PagingLinks($moviesCount, (int)$params->hits_per_page, (int)$params->page);
 
 
 $mapo['main'] = "<div class='movies-wrapper'>
@@ -100,6 +101,9 @@ $htmlTable
 $pagingLinks
 </div>
 <br style='clear:both;' />
+<p>
+$debugMessage
+</p>
 </div>
 ";
 

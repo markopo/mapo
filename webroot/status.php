@@ -4,25 +4,26 @@ include(__DIR__.'/config.php');
 
 $statusMessage = "";
 
+
 $cUser = new CUser($mapo['database']);
-$cUser->Logout();
 
 $isLoggedIn = $cUser->IsAuthenticated();
 
 if($isLoggedIn == true){
-    $statusMessage = "Du är inloggad!";
+    $name = $cUser->GetName();
+    $statusMessage = "Grattis! $name är inloggad!";
 }
 else {
     $statusMessage = "Du är utloggad!";
 }
 
-$mapo['title'] = "Logout";
 
+$mapo['title'] = "Logout";
 
 $mapo['header'] = Template::Header();
 
 $mapo['main'] = <<< TEMPLATE
-<h2>Logout</h2>
+<h2>Login status</h2>
 <p>$statusMessage</p>
 TEMPLATE;
 

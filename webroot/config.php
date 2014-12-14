@@ -35,19 +35,6 @@ include(MAPO_INSTALL_PATH. '/src/bootstrap.php');
 session_name(preg_replace('/[^a-z\d]/i', '', __DIR__));
 session_start();
 
-/** Sorting */
-if(!isset($_SESSION["sort_id"])){
-    $_SESSION["sort_id"] = "ASC";
-}
-
-if(!isset($_SESSION["sort_title"])){
-    $_SESSION["sort_title"] = "ASC";
-}
-
-if(!isset($_SESSION["sort_year"])){
-    $_SESSION["sort_year"] = "ASC";
-}
-
 
 /**
  * Create the mapo variable.
@@ -83,8 +70,10 @@ $mapo['navmenu'] = array(
     'me' => array('text' => 'Me', 'url' => 'me.php', 'class'=>null),
     'source' => array('text' => 'Source', 'url' => 'source.php', 'class'=>null),
     'manadens_babe' => array('text' => 'Kalender', 'url' => 'manadens_babe.php', 'class'=>null),
-    'movies' => array('text' => 'Movies', 'url' => 'movies.php', 'class'=>null)
-    )
+    'movies' => array('text' => 'Movies', 'url' => 'movies.php', 'class'=>null),
+    'login' => array('text' => 'Login', 'url' => 'login.php', 'class'=>null),
+    'logout' => array('text' => 'Logout', 'url' => 'logout.php', 'class'=>null),
+    'status' => array('text' => 'Status', 'url' => 'status.php', 'class'=>null))
 );
 
 /**

@@ -43,7 +43,7 @@ från PDO som jag tycker är bra.
 Det är en vanlig klass som man måste instansiera upp med publika metoder för att få tag i olika data som man behöver. Andra klasser som <i>Helpers</i> klassen och <i>HtmlMovies</i> har jag lämnat
 dess metoder som <b>public static</b> för att slippa skapa en instans av dem och för att de mer agerar som utility funktioner.
 </p>
-<p><strong> MERGE vs TEMPTABLE ALGORITHM </strong> - Om man skall definiera en vy skall man försöka använda sig av MERGE algoritmen istället för TEMPTABLE som isf
+<p>Det är bra att känna till olika sätt att definiera en vy <i>(view)</i> - <strong> MERGE vs TEMPTABLE ALGORITHM </strong> - Om man skall definiera en vy skall man försöka använda sig av MERGE algoritmen istället för TEMPTABLE som isf
 gör en table-scan av tabellen. Med MERGE kommer den optimera vyn att fungera som en vanlig sql-fråga istället. Annars kan man lämna den UNDEFINED vilket den är per default och försöker
 då växla till den som är mest optimal för just den servern som databasen befinner sig på.
 Annars är det ju en generell regel inom SQL att minimera antalet kolumner som vyn hämtar, hämta bara de som behövs. Exkludera de som inte behövs - allt för prestandan. Men vyer är ändå kraftfullt
@@ -68,6 +68,14 @@ Jag har försökt ha en slags kodstandard i min kod, för att hålla kodbasen ty
 <li>Gruppera public och private properties och metoder var för sig för överskådlighet.</li>
 <li>Separera klasser och metoder från dataaccess och rendering av html.</li>
 </ul>
+<h4>Reflektioner</h4>
+<p>Söksidan tog längre tid än jag räknade med och var bökigare än jag trodde, men det gick ju bra till slut. Det gick överlag bra att jobba med <i>PHP PDO</i> men några småproblem stötte man
+väl på vägen. Nu när man jobbar objekt-orienterat känns det som det är kodning på riktigt i egentligen. Något annat skulle man inte vilja skriva. Min tanke är i alla fall att separera databasklasser
+mot rendering av html. Det är iaf en no-no. Databasfunktioner skall finnas i egna klasser. Rendering av html skall finnas i andra klasser. Sen tycker jag är det är behändigt att kapsla in olika hjälpfunktioner
+i egna klasser och funktioner, t.ex har jag en helpers klass som gör många av dessa repetitiva och tråkiga uppgifter, som kapslar in dem. Det minimerar ju en del redundans. Överlag känns det bra, och jag är redo
+för mer!
+</p>
+<p><b>Kippis ja kulaus!</b></p>
 
 
 <h2>KMOM03 - SQL och databasen MySql</h2>

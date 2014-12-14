@@ -24,6 +24,12 @@ a.selected {
     font-weight: bold;
 }
 
+.login-form ul {
+    list-style: none;
+    margin: 0;
+    padding: 5px 0;
+}
+
 /* unslider */
 .banner { position: relative; overflow: auto; margin: -10px 0 0 0; padding: 0; }
 .banner ul { margin: 0; padding: 0; width: 960px; }
