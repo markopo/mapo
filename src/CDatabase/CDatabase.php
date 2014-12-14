@@ -135,7 +135,7 @@ class CDatabase {
         if($params->ordercol != null && $params->orderdir != null){
             $ordercol = in_array($params->ordercol, array("title", "year", "id")) ? $params->ordercol : "id";
             $orderdir = $params->orderdir == "ASC" ? "ASC" : "DESC";
-            $sql .= "ORDER BY :ordercol :orderdir ";
+            $sql .= "ORDER BY $ordercol $orderdir ";
         }
 
         if($params->hits_per_page != null && $params->page != null){
@@ -177,12 +177,6 @@ class CDatabase {
             }
             elseif($params->startyear == null && $params->endyear != null) {
                 $this->stmt->bindParam(":endyear", $params->endyear);
-            }
-
-            // ORDER
-            if($ordercol != null && $orderdir != null){
-                $this->stmt->bindParam(":ordercol", $ordercol);
-                $this->stmt->bindParam(":orderdir", $orderdir);
             }
 
             // PAGING
