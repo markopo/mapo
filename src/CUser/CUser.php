@@ -44,7 +44,7 @@ class CUser {
 
     public function Login($acronym, $password){
         try {
-            $sql = "SELECT acronym, name FROM USER WHERE acronym = :acronym AND password = md5(concat(:password, salt))";
+            $sql = "SELECT acronym, name FROM `user` WHERE acronym = :acronym AND password = md5(concat(:password, salt))";
 
             $this->stmt = $this->db->prepare($sql);
 
