@@ -36,8 +36,6 @@ class CDatabase {
             $this->db = new PDO($this->options['dsn'], $this->options['username'], $this->options['password'], $this->options['driver_options']);
         }
         catch(Exception $e) {
-            $error = "class: ".__CLASS__." ,method: ".__METHOD__." ,message:".$e->getMessage();
-            ErrorLog::Write($error);
 
             throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
 
