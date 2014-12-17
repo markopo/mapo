@@ -44,39 +44,97 @@ class CContent {
 
     }
 
-    protected function Query($param){
-
-
-    }
 
 
     public function Create() {
-
-
+        $this->db->beginTransaction();
+        $sql = "CREATE TABLE Content(
+                    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+                    slug CHAR(80) UNIQUE,
+                    type CHAR(80),
+                    title VARCHAR(80),
+                    data TEXT,
+                    filter CHAR(80),
+                    published DATETIME,
+                    created DATETIME,
+                    updated DATETIME,
+                    deleted DATETIME
+                )	ENGINE INNODB CHARACTER SET utf8;";
+        $this->db->exec($sql);
+        $this->db->commit();
     }
+
 
     public function Drop() {
-
-
+        $this->db->beginTransaction();
+        $sql = "DROP TABLE IF EXISTS Content;";
+        $this->db->exec($sql);
+        $this->db->commit();
     }
 
-    public function Delete() {
-
-
+    /**
+     *
+     */
+    public function DeleteAll() {
+        $this->db->beginTransaction();
+        $sql = "DELETE FROM Content";
+        $this->db->exec($sql);
+        $this->db->commit();
     }
 
+    /**
+     * @param $id
+     */
+    public function DeleteById($id) {
+        $this->db->beginTransaction();
+        $sql = "DELETE FROM Content WHERE id = :id";
+        $this->stmt = $this->db->prepare($sql);
+        $this->stmt->bindParam(":id", $id);
+        $this->db->commit();
+    }
+
+    /**
+     * @param $param stdClass
+     *
+     */
     public function Update($param){
+        $this->db->beginTransaction();
+        $sql = "UPDATE Content SET
+                title = :title,
+                slug = :slug,
+                url = :url,
+                data = :data,
+                type = :type,
+                filter = :filter,
+                published = :published,
+                updated = NOW()
+                WHERE id = :id
+                ";
+        $this->stmt = $this->db->prepare($sql);
+
+        $this->stmt->bindParam(":title", $param->title);
+        $this->stmt->bindParam(":slug", $param->slug);
+        $this->stmt->bindParam(":url", $param->url);
+        $this->stmt->bindParam(":data", $param->data);
+        $this->stmt->bindParam(":type", $param->type);
+        $this->stmt->bindParam(":filter", $param->filter);
+        $this->stmt->bindParam(":published", $param->published);
+        $this->stmt->execute();
+        $this->db->commit();
+    }
+
+
+
+    public function SelectOne($param = array()) {
+        $sql = "SELECT * FROM Content";
 
 
     }
 
-    public function SelectOne($param = null) {
-
-
-    }
-
-    public function SelectMultiple($param = null){
-
+    public function SelectMultiple($param = array()){
+        $sql = "SELECT * FROM Content";
+        $res = $this->Query($sql, $param);
+        return $res->fetchAll();
     }
 
 }
