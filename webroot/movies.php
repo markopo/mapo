@@ -20,7 +20,7 @@ $ucUrl = "$host$url/img/uc.png";
 /* end image */
 
 /** START DB instance */
-$db = new CMovie($mapo['database'], true);
+$db = new CMovie($mapo['database']);
 $genres = $db->GetGenres();
 
 
