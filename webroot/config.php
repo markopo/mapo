@@ -21,6 +21,8 @@ define('MAPO_INSTALL_PATH', __DIR__ . '/..');
 define('MAPO_THEME_PATH', MAPO_INSTALL_PATH . '/theme/render.php');
 
 
+
+
 /**
  * Include bootstrapping functions.
  *
@@ -96,15 +98,17 @@ $mapo['google_analytics'] = null;
  * Settings for the database.
  *
  */
+define('DB_PASSWORD_LOCAL', 'paska');
+define('DB_PASSWORD_PROD', 'vrh;Tf{2');
 if($_SERVER['HTTP_HOST'] == 'localhost:8080' || $_SERVER['HTTP_HOST'] == '127.0.0.1:8080') {
     $mapo['database']['dsn'] = 'mysql:host=localhost;dbname=Movie;';
     $mapo['database']['username'] = 'root';
-    $mapo['database']['password'] = 'paska';
+    $mapo['database']['password'] = DB_PASSWORD_LOCAL;
 }
 else {
     $mapo['database']['dsn'] = 'mysql:host=blu-ray.student.bth.se;dbname=mapn14;';
     $mapo['database']['username'] = 'mapn14';
-    $mapo['database']['password'] = 'vrh;Tf{2';
+    $mapo['database']['password'] = DB_PASSWORD_PROD;
 }
 
 

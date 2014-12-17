@@ -43,26 +43,19 @@ class CUser {
     }
 
     public function Login($acronym, $password){
-        try {
-            $sql = "SELECT acronym, name FROM `user` WHERE acronym = :acronym AND password = md5(concat(:password, salt))";
+        $sql = "SELECT acronym, name FROM `user` WHERE acronym = :acronym AND password = md5(concat(:password, salt))";
 
-            $this->stmt = $this->db->prepare($sql);
+        $this->stmt = $this->db->prepare($sql);
 
-            $this->stmt->bindParam(":acronym", $acronym);
-            $this->stmt->bindParam(":password", $password);
+        $this->stmt->bindParam(":acronym", $acronym);
+        $this->stmt->bindParam(":password", $password);
 
-            $this->stmt->execute();
-            $res = $this->stmt->fetch();
-            if($res->acronym == $acronym){
-                $_SESSION[CUser::ACRONYM_LOGGEDIN] = $res->acronym;
-                $_SESSION[CUser::NAME_LOGGEDIN] = $res->name;
-            }
+        $this->stmt->execute();
+        $res = $this->stmt->fetch();
+        if($res != null && $res->acronym == $acronym){
+            $_SESSION[CUser::ACRONYM_LOGGEDIN] = $res->acronym;
+            $_SESSION[CUser::NAME_LOGGEDIN] = $res->name;
         }
-        catch(PDOException $e){
-           $error = "class: ".__CLASS__." ,method: ".__METHOD__." ,message:".$e->getMessage();
-           ErrorLog::Write($error);
-        }
-
     }
 
 
