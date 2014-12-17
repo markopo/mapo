@@ -6,7 +6,7 @@
  * Time: 13:34
  */
 
-class CMovie {
+class CMovie extends CDatabase {
 
     /**
      * Members
