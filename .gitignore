@@ -15,4 +15,4 @@ ehthumbs.db
 Thumbs.db
 
 #phpstorm settings
-workspace.xml
+.idea/workspace.xml
