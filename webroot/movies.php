@@ -20,10 +20,10 @@ $ucUrl = "$host$url/img/uc.png";
 /* end image */
 
 /** START DB instance */
-$db = new CDatabase($mapo['database']);
+$db = new CMovie($mapo['database'], true);
 $genres = $db->GetGenres();
 
-//echo var_dump($genres);
+
 
 
 /** GET to params */
@@ -71,7 +71,6 @@ $params->genre = Helpers::HasGenre($genres, $params->genre);
     */
 $htmlGenres = HtmlMovies::GenresLinks($genres, $params->genre);
 
-//  echo var_dump($params);
 
 $res = $db->GetMovies($params);
 $moviesCount = $db->GetMoviesCount();
