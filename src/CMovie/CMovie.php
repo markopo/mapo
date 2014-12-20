@@ -11,39 +11,19 @@ class CMovie extends CDatabase {
     /**
      * Members
      */
+    /*
     private $options;                   // Options used when creating the PDO object
-    private $db   = null;               // The PDO object
+    public $db   = null;               // The PDO object
     private $stmt = null;               // The latest statement used to execute a query
 
     private $debug;
 
     public $errorMessage = "";
     public $debugMessage = "";
+    */
 
     public function __construct($options, $debug=false){
-        $default = array(
-            'dsn' => null,
-            'username' => null,
-            'password' => null,
-            'driver_options' => null,
-            'fetch_style' => PDO::FETCH_OBJ,
-        );
-        $this->options = array_merge($default, $options);
-
-        $this->debug = $debug;
-
-        try {
-            $this->db = new PDO($this->options['dsn'], $this->options['username'], $this->options['password'], $this->options['driver_options']);
-        }
-        catch(Exception $e) {
-
-            throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
-
-        }
-
-        $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']);
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-
+        parent::__construct($options, $debug);
     }
 
     /**
@@ -53,19 +33,8 @@ class CMovie extends CDatabase {
      * @return array with resultset.
      */
     public function GetGenres() {
-
         $sql = "SELECT name FROM `genre` ORDER BY name ASC";
-
-        $this->stmt = $this->db->prepare($sql);
-        try {
-            $this->stmt->execute();
-        }
-        catch (PDOException $e)
-        {
-            $this->errorMessage = __METHOD__. ": ".$e->getMessage();
-
-        }
-        return $this->stmt->fetchAll();
+        return parent::FetchAll($sql);
     }
 
     /**
@@ -74,19 +43,10 @@ class CMovie extends CDatabase {
      * @return count of movies.
      */
     public function GetMoviesCount() {
-        $res = null;
-        try {
-            $sql = "SELECT COUNT(id) as antal FROM `vmovie`";
-            $this->stmt = $this->db->prepare($sql);
-            $this->stmt->execute();
-            $res = $this->stmt->fetch();
-        }
-        catch (PDOException $e)
-        {
-            $this->errorMessage = __METHOD__. ": ".$e->getMessage();
 
-        }
-        return $res->antal;
+        $sql = "SELECT COUNT(id) as antal FROM `vmovie`";
+        $res = parent::Fetch($sql);
+        return $res != null ?  $res->antal : 0;
     }
 
 
@@ -98,13 +58,15 @@ class CMovie extends CDatabase {
      */
     public function GetMovies($params) {
 
+        $res = null;
+        $sql = "SELECT id, title, genre, image, YEAR FROM `vmovie` ";
+        $bindParams = array();
+
         $ordercol = null;
         $orderdir = null;
 
         $hitsperpage = null;
         $page = null;
-
-        $sql = "SELECT id, image, title, genre, image, YEAR FROM `vmovie` ";
 
 
         if($params->title != null){
@@ -112,21 +74,21 @@ class CMovie extends CDatabase {
         }
 
         if($params->genre != null){
-            $sql = $this->HasWhereInSql($sql);
+            $sql = parent::HasWhereInSql($sql);
             $sql .= "genre LIKE :genre ";
         }
 
 
         if($params->startyear != null && $params->endyear != null){
-            $sql = $this->HasWhereInSql($sql);
+            $sql = parent::HasWhereInSql($sql);
             $sql .= "year BETWEEN :startyear and :endyear ";
         }
         elseif($params->startyear != null && $params->endyear == null){
-            $sql = $this->HasWhereInSql($sql);
+            $sql = parent::HasWhereInSql($sql);
             $sql .= "year >= :startyear ";
         }
         elseif($params->startyear == null && $params->endyear != null) {
-            $sql = $this->HasWhereInSql($sql);
+            $sql = parent::HasWhereInSql($sql);
             $sql .= "year <= :endyear ";
         }
 
@@ -135,6 +97,7 @@ class CMovie extends CDatabase {
             $orderdir = $params->orderdir == "ASC" ? "ASC" : "DESC";
             $sql .= "ORDER BY $ordercol $orderdir ";
         }
+
 
         if($params->hits_per_page != null && $params->page != null){
             $hitsperpage = (int)$params->hits_per_page;
@@ -146,65 +109,64 @@ class CMovie extends CDatabase {
                 $page = $hitsperpage * ($page-1);
                 $sql .= "OFFSET :page ";
             }
-
         }
 
-        try {
 
-            $this->stmt = $this->db->prepare($sql);
+        try {
 
             // TITLE
             if ($params->title != null) {
                 $title = "%".$params->title."%";
-                $this->stmt->bindParam(":title", $title);
+            //    parent::$stmt->bindParam(":title", $title);
+                $bindParams[":title"] = array($title);
             }
 
             // GENRE
             if($params->genre != null){
                 $genre = "%".$params->genre."%";
-                $this->stmt->bindParam(":genre", $genre);
+                $bindParams[":genre"] = array($genre);
             }
 
             // YEAR
             if($params->startyear != null && $params->endyear != null){
-                $this->stmt->bindParam(":startyear", $params->startyear);
-                $this->stmt->bindParam(":endyear", $params->endyear);
+                $bindParams[":startyear"] = array($params->startyear);
+                $bindParams[":endyear"] = array($params->endyear);
             }
             elseif($params->startyear != null && $params->endyear == null){
-                $this->stmt->bindParam(":startyear", $params->startyear);
+                $bindParams[":startyear"] = array($params->startyear);
             }
             elseif($params->startyear == null && $params->endyear != null) {
-                $this->stmt->bindParam(":endyear", $params->endyear);
+                $bindParams[":endyear"] = array($params->endyear);
             }
+
 
             // PAGING
             if($hitsperpage != null && $page != null) {
-                $this->stmt->bindParam(":hitsperpage", $hitsperpage, PDO::PARAM_INT);
+                $bindParams[":hitsperpage"] = array($hitsperpage, PDO::PARAM_INT);
 
                 if($page > 1) {
-                    $this->stmt->bindParam(":page", $page, PDO::PARAM_INT);
+                    $bindParams[":page"] = array($page, PDO::PARAM_INT);
                 }
             }
 
+
             /** DEBUG INFO */
-            if($this->debug == true) {
-                $this->debugMessage = "<p>Query = <br/><pre>{$sql}</pre></p></p>";
+          /*  if(parent::$debug == true) {
+                parent::$debugMessage = "<p>Query = <br/><pre>{$sql}</pre></p></p>";
             }
+          */
 
-
-            $this->stmt->execute();
+            $res = parent::FetchAll($sql, $bindParams);
 
         }
         catch (PDOException $e)
         {
             $this->errorMessage = __METHOD__. ": ".$e->getMessage();
-
-
         }
-        return $this->stmt->fetchAll();
+        return $res;
     }
 
-
+    /*
     private function HasWhereInSql($sql){
         if(strpos($sql, "WHERE") == false){
             $sql .= "WHERE ";
@@ -214,5 +176,5 @@ class CMovie extends CDatabase {
         }
         return $sql;
     }
-
+    */
 }

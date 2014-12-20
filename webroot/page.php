@@ -10,7 +10,7 @@ $mapo['header'] = Template::Header();
 
 $cContent = new CContent($mapo['database']);
 
-$cContent->Create();
+//$cContent->Create();
 
 
 

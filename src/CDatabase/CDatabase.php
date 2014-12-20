@@ -11,11 +11,11 @@ class CDatabase {
     /**
      * Members
      */
-    private $options;                   // Options used when creating the PDO object
-    private $db   = null;               // The PDO object
-    private $stmt = null;               // The latest statement used to execute a query
+    protected $options;                   // Options used when creating the PDO object
+    protected $db   = null;               // The PDO object
+    protected $stmt = null;               // The latest statement used to execute a query
 
-    private $debug;
+    public $debug;
 
     public $errorMessage = "";
     public $debugMessage = "";
@@ -47,11 +47,76 @@ class CDatabase {
     }
 
 
+    public function Execute($sql){
+        $this->db->beginTransaction();
+        $this->db->exec($sql);
+        $this->db->commit();
+    }
+
+    public function ExecuteWithParams($sql, $params=array()){
+        $this->db->beginTransaction();
+        $this->stmt = $this->db->prepare($sql);
+
+        if(count($params) > 0) {
+            foreach ($params as $key => $value) {
+                $this->stmt->bindParam($key, $value);
+            }
+        }
+
+        $this->stmt->execute();
+        $this->db->commit();
+    }
 
 
+    public function FetchAll($sql, $params=array()){
+        $this->stmt = $this->db->prepare($sql);
+        try {
+            $this->bindParams($params);
+
+            $this->stmt->execute();
+        }
+        catch (PDOException $e)
+        {
+            $this->errorMessage = __METHOD__. ": ".$e->getMessage();
+
+        }
+        return $this->stmt->fetchAll();
+    }
+
+    public function Fetch($sql, $params=array()){
+        try {
+
+            $this->stmt = $this->db->prepare($sql);
+
+            $this->bindParams($params);
+
+            $this->stmt->execute();
+            $res = $this->stmt->fetch();
+        }
+        catch (PDOException $e)
+        {
+            $this->errorMessage = __METHOD__. ": ".$e->getMessage();
+
+        }
+        return $res;
+    }
 
 
-    private function HasWhereInSql($sql){
+    private function bindParams($params){
+        if(count($params) > 0) {
+            foreach ($params as $key => $value) {
+                if(count($value) == 1) {
+                    $this->stmt->bindParam($key, $value[0]);
+                }
+                else if(count($value) == 2) {
+                    $this->stmt->bindParam($key, $value[0], $value[1]);
+                }
+            }
+        }
+    }
+
+
+    protected function HasWhereInSql($sql){
         if(strpos($sql, "WHERE") == false){
             $sql .= "WHERE ";
         }

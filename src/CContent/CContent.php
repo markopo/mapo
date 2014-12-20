@@ -6,8 +6,9 @@
  * Time: 20:46
  */
 
-class CContent {
+class CContent extends CDatabase {
 
+    /*
     private $options;                   // Options used when creating the PDO object
     private $db   = null;               // The PDO object
     private $stmt = null;               // The latest statement used to execute a query
@@ -16,38 +17,18 @@ class CContent {
 
     public $errorMessage = "";
     public $debugMessage = "";
-
+    */
 
     public function __construct($options, $debug=false){
-        $default = array(
-            'dsn' => null,
-            'username' => null,
-            'password' => null,
-            'driver_options' => null,
-            'fetch_style' => PDO::FETCH_OBJ,
-        );
-        $this->options = array_merge($default, $options);
 
-        $this->debug = $debug;
-
-        try {
-            $this->db = new PDO($this->options['dsn'], $this->options['username'], $this->options['password'], $this->options['driver_options']);
-        }
-        catch(Exception $e) {
-
-            throw new PDOException('Could not connect to database, hiding connection details.'); // Hide connection details.
-
-        }
-
-        $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']);
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        parent::__construct($options, $debug);
 
     }
 
 
 
     public function Create() {
-        $this->db->beginTransaction();
+
         $sql = "CREATE TABLE Content(
                     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                     slug CHAR(80) UNIQUE,
@@ -60,37 +41,29 @@ class CContent {
                     updated DATETIME,
                     deleted DATETIME
                 )	ENGINE INNODB CHARACTER SET utf8;";
-        $this->db->exec($sql);
-        $this->db->commit();
+         parent::Execute($sql);
     }
 
 
     public function Drop() {
-        $this->db->beginTransaction();
         $sql = "DROP TABLE IF EXISTS Content;";
-        $this->db->exec($sql);
-        $this->db->commit();
+        parent::Execute($sql);
     }
 
     /**
      *
      */
     public function DeleteAll() {
-        $this->db->beginTransaction();
         $sql = "DELETE FROM Content";
-        $this->db->exec($sql);
-        $this->db->commit();
+        parent::Execute($sql);
     }
 
     /**
      * @param $id
      */
     public function DeleteById($id) {
-        $this->db->beginTransaction();
         $sql = "DELETE FROM Content WHERE id = :id";
-        $this->stmt = $this->db->prepare($sql);
-        $this->stmt->bindParam(":id", $id);
-        $this->db->commit();
+        parent::ExecuteWithParams($sql, array(":id"=>$id));
     }
 
     /**
@@ -98,7 +71,6 @@ class CContent {
      *
      */
     public function Update($param){
-        $this->db->beginTransaction();
         $sql = "UPDATE Content SET
                 title = :title,
                 slug = :slug,
@@ -110,17 +82,17 @@ class CContent {
                 updated = NOW()
                 WHERE id = :id
                 ";
-        $this->stmt = $this->db->prepare($sql);
 
-        $this->stmt->bindParam(":title", $param->title);
-        $this->stmt->bindParam(":slug", $param->slug);
-        $this->stmt->bindParam(":url", $param->url);
-        $this->stmt->bindParam(":data", $param->data);
-        $this->stmt->bindParam(":type", $param->type);
-        $this->stmt->bindParam(":filter", $param->filter);
-        $this->stmt->bindParam(":published", $param->published);
-        $this->stmt->execute();
-        $this->db->commit();
+         $params =  array(":title" => $param->title,
+              ":slug" => $param->slug,
+              ":url" => $param->url,
+              ":data" => $param->data,
+              ":type" => $param->type,
+              ":filter" => $param->filter,
+              ":published" => $param->published
+             );
+
+         parent::ExecuteWithParams($sql, $params);
     }
 
 
