@@ -8,24 +8,10 @@
 
 class CContent extends CDatabase {
 
-    /*
-    private $options;                   // Options used when creating the PDO object
-    private $db   = null;               // The PDO object
-    private $stmt = null;               // The latest statement used to execute a query
-
-    private $debug;
-
-    public $errorMessage = "";
-    public $debugMessage = "";
-    */
 
     public function __construct($options, $debug=false){
-
         parent::__construct($options, $debug);
-
     }
-
-
 
     public function Create() {
 
@@ -63,7 +49,9 @@ class CContent extends CDatabase {
      */
     public function DeleteById($id) {
         $sql = "DELETE FROM Content WHERE id = :id";
-        parent::ExecuteWithParams($sql, array(":id"=>$id));
+        $params = array();
+        $params[":id"] = array($id);
+        parent::ExecuteWithParams($sql, $params);
     }
 
     /**
@@ -83,30 +71,30 @@ class CContent extends CDatabase {
                 WHERE id = :id
                 ";
 
-         $params =  array(":title" => $param->title,
-              ":slug" => $param->slug,
-              ":url" => $param->url,
-              ":data" => $param->data,
-              ":type" => $param->type,
-              ":filter" => $param->filter,
-              ":published" => $param->published
-             );
+            $params =  array();
+            $params[":title"] = array($param->title);
+            $params[":slug"] = array($param->slug);
+            $params[":url"] = array($param->url);
+            $params[":data"] = array($param->data);
+            $params[":type"] = array($param->type);
+            $params[":filter"] = array($param->filter);
+            $params[":published"] = array($param->published);
 
-         parent::ExecuteWithParams($sql, $params);
+            parent::ExecuteWithParams($sql, $params);
     }
 
 
 
-    public function SelectOne($param = array()) {
-        $sql = "SELECT * FROM Content";
-
-
+    public function SelectOne($id) {
+        $sql = "SELECT * FROM Content WHERE id = :id";
+        $param = array();
+        $param[":id"] = array($id);
+        return parent::Fetch($sql, $param);
     }
 
-    public function SelectMultiple($param = array()){
+    public function SelectAll(){
         $sql = "SELECT * FROM Content";
-        $res = $this->Query($sql, $param);
-        return $res->fetchAll();
+        return parent::FetchAll($sql);
     }
 
 }

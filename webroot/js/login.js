@@ -4,7 +4,7 @@
 
 (function() {
     $("input#username").val("").focus();
-    $("input#password").val(""); 
+    $("input#password").val("");
 
 
 
