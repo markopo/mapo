@@ -47,13 +47,13 @@ class CDatabase {
     }
 
 
-    public function Execute($sql){
+    protected function Execute($sql){
         $this->db->beginTransaction();
         $this->db->exec($sql);
         $this->db->commit();
     }
 
-    public function ExecuteWithParams($sql, $params=array()){
+    protected function ExecuteWithParams($sql, $params=array()){
         $this->db->beginTransaction();
         $this->stmt = $this->db->prepare($sql);
 
@@ -68,7 +68,7 @@ class CDatabase {
     }
 
 
-    public function FetchAll($sql, $params=array()){
+    protected function FetchAll($sql, $params=array()){
         $this->stmt = $this->db->prepare($sql);
         try {
             $this->bindParams($params);
@@ -83,7 +83,7 @@ class CDatabase {
         return $this->stmt->fetchAll();
     }
 
-    public function Fetch($sql, $params=array()){
+    protected function Fetch($sql, $params=array()){
         try {
 
             $this->stmt = $this->db->prepare($sql);

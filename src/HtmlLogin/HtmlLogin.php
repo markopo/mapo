@@ -34,6 +34,11 @@ class HtmlLogin {
         </script>";
     }
 
+    public static function LogoutRedirect() {
+        header("Location: status.php");
+        exit;
+    }
+
 
 
 

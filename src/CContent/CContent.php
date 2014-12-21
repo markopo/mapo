@@ -93,7 +93,7 @@ class CContent extends CDatabase {
     }
 
     public function SelectAll(){
-        $sql = "SELECT * FROM Content";
+        $sql = "select id,type,title,published,created,updated,deleted from `content` order by id asc ";
         return parent::FetchAll($sql);
     }
 
