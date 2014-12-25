@@ -6,8 +6,14 @@
  * Time: 19:47
  */
 
+/**
+ * Class HtmlLogin
+ */
 class HtmlLogin {
 
+    /**
+     * @return string
+     */
     public static function LoginForm() {
         return "<div class='login-form'>
         <form action='login.php' method='post'>
@@ -26,6 +32,9 @@ class HtmlLogin {
        </div>";
     }
 
+    /**
+     * @return string
+     */
     public static function LoginRedirect() {
         return "<script>
             (function() {
@@ -34,6 +43,9 @@ class HtmlLogin {
         </script>";
     }
 
+    /**
+     *
+     */
     public static function LogoutRedirect() {
         header("Location: status.php");
         exit;

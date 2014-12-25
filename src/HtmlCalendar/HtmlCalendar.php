@@ -6,6 +6,9 @@
  * Time: 22:56
  */
 
+/**
+ * Class HtmlCalendar
+ */
 class HtmlCalendar extends Calendar {
 
     CONST DAYS = 7;
@@ -15,6 +18,11 @@ class HtmlCalendar extends Calendar {
 
     }
 
+    /**
+     * @param $year
+     * @param $month
+     * @return string
+     */
     public function getNavigationLinks($year, $month) {
 
         $prevMonth = $month-1;
@@ -41,17 +49,29 @@ class HtmlCalendar extends Calendar {
                 </div>";
     }
 
-
+    /**
+     * @param $month
+     * @return string
+     */
     public function getMonthName($month) {
         $monthName = parent::getMonthName($month);
         return "<span class='month'>$monthName</span>";
     }
 
+    /**
+     * @param $month
+     * @return string
+     */
     public function getMonthBabe($month) {
         $monthbabe = parent::getMonthBabe($month);
         return "<div class='babe'><img src='$monthbabe' alt='$month' ></div>";
     }
 
+    /**
+     * @param $year
+     * @param $month
+     * @return string
+     */
     public function getCalendar($year, $month) {
         $calendar = parent::getCalendar($year, $month);
 

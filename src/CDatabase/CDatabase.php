@@ -6,6 +6,9 @@
  * Time: 13:34
  */
 
+/**
+ * Class CDatabase
+ */
 class CDatabase {
 
     /**
@@ -46,13 +49,20 @@ class CDatabase {
 
     }
 
-
+    /**
+     * @param $sql
+     */
     protected function Execute($sql){
         $this->db->beginTransaction();
         $this->db->exec($sql);
         $this->db->commit();
     }
 
+    /**
+     * @param $sql
+     * @param array $params
+     *
+     */
     protected function ExecuteWithParams($sql, $params=array()){
         $this->db->beginTransaction();
         $this->stmt = $this->db->prepare($sql);
@@ -67,7 +77,11 @@ class CDatabase {
         $this->db->commit();
     }
 
-
+    /**
+     * @param $sql
+     * @param array $params
+     * @return array
+     */
     protected function FetchAll($sql, $params=array()){
         $this->stmt = $this->db->prepare($sql);
         try {
@@ -83,6 +97,11 @@ class CDatabase {
         return $this->stmt->fetchAll();
     }
 
+    /**
+     * @param $sql
+     * @param array $params
+     * @return mixed
+     */
     protected function Fetch($sql, $params=array()){
         try {
 
@@ -101,7 +120,9 @@ class CDatabase {
         return $res;
     }
 
-
+    /**
+     * @param $params
+     */
     private function bindParams($params){
         if(count($params) > 0) {
             foreach ($params as $key => $value) {
@@ -115,7 +136,10 @@ class CDatabase {
         }
     }
 
-
+    /**
+     * @param $sql
+     * @return string
+     */
     protected function HasWhereInSql($sql){
         if(strpos($sql, "WHERE") == false){
             $sql .= "WHERE ";

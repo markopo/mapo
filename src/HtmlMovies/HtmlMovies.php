@@ -6,8 +6,16 @@
  * Time: 20:07
  */
 
+/**
+ * Class HtmlMovies
+ */
 class HtmlMovies {
 
+    /**
+     * @param $genres
+     * @param $params
+     * @return string
+     */
     public static function SearchForm($genres, $params) {
 
         $title = Helpers::IsNullOrEmpty($params->title);
@@ -69,7 +77,11 @@ class HtmlMovies {
     }
 
 
-
+    /**
+     * @param $res
+     * @param $params
+     * @return string
+     */
     public static function SearchTable($res, $params){
         $html = "";
         if(count($res) > 0) {
@@ -101,6 +113,11 @@ class HtmlMovies {
         return $html;
     }
 
+
+    /**
+     * @param $selHits
+     * @return string
+     */
     public static function HitsPerPageLinks($selHits){
         $html = "";
         $html .= "<span>Träffar per sida:</span>";
@@ -111,6 +128,12 @@ class HtmlMovies {
         return $html;
     }
 
+    /**
+     * @param $total
+     * @param $hitsperpage
+     * @param $selectedPage
+     * @return string
+     */
     public static function PagingLinks($total, $hitsperpage, $selectedPage){
 
         $selectedFirst = $selectedPage == 0 ? "selected" : "";
@@ -128,6 +151,11 @@ class HtmlMovies {
         return $html;
     }
 
+    /**
+     * @param $genres
+     * @param $selectedGenre
+     * @return string
+     */
     public static function GenresLinks($genres, $selectedGenre){
         $html = "";
         $selectedGenre = Helpers::IsNullOrEmpty($selectedGenre);
@@ -142,6 +170,12 @@ class HtmlMovies {
     }
 
 
+    /**
+     * @param $dir
+     * @param $col
+     * @param $whichCol
+     * @return string
+     */
     private static function orderDir($dir, $col, $whichCol){
         if($col == $whichCol) {
             return $dir == "ASC" ? "ASC" : "DESC";
@@ -149,6 +183,12 @@ class HtmlMovies {
         return "ASC";
     }
 
+    /***
+     * @param $dir
+     * @param $col
+     * @param $whichCol
+     * @return string
+     */
     private static function orderArrow($dir, $col, $whichCol){
         if($col == $whichCol) {
             return $dir == "ASC" ? "arrow-up" : "arrow-down";

@@ -6,8 +6,14 @@
  * Time: 19:18
  */
 
+/**
+ * Class HtmlAdmin
+ */
 class HtmlAdmin {
 
+    /**
+     * @return string
+     */
     public static function AdminLinks(){
         $html = "<ul>";
         $html .= "<li><a href='content.php'>content</a></li>";

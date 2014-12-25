@@ -6,6 +6,9 @@
  * Time: 13:34
  */
 
+/**
+ * Class CMovie
+ */
 class CMovie extends CDatabase {
 
     /**

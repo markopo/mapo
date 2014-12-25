@@ -6,6 +6,9 @@
  * Time: 20:46
  */
 
+/**
+ * Class CContent
+ */
 class CContent extends CDatabase {
 
 
@@ -13,6 +16,9 @@ class CContent extends CDatabase {
         parent::__construct($options, $debug);
     }
 
+    /**
+     *
+     */
     public function Create() {
 
         $sql = "CREATE TABLE Content(
@@ -30,7 +36,9 @@ class CContent extends CDatabase {
          parent::Execute($sql);
     }
 
-
+    /***
+     *
+     */
     public function Drop() {
         $sql = "DROP TABLE IF EXISTS Content;";
         parent::Execute($sql);
@@ -55,8 +63,7 @@ class CContent extends CDatabase {
     }
 
     /**
-     * @param $param stdClass
-     *
+     * @param $param
      */
     public function Update($param){
         $sql = "UPDATE Content SET
@@ -83,8 +90,10 @@ class CContent extends CDatabase {
             parent::ExecuteWithParams($sql, $params);
     }
 
-
-
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function SelectOne($id) {
         $sql = "SELECT * FROM Content WHERE id = :id";
         $param = array();
@@ -92,6 +101,9 @@ class CContent extends CDatabase {
         return parent::Fetch($sql, $param);
     }
 
+    /**
+     * @return array
+     */
     public function SelectAll(){
         $sql = "select id,type,title,published,created,updated,deleted from `content` order by id asc ";
         return parent::FetchAll($sql);

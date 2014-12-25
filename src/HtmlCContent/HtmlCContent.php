@@ -6,8 +6,15 @@
  * Time: 18:42
  */
 
+/**
+ * Class HtmlCContent
+ */
 class HtmlCContent {
 
+    /**
+     * @param $res
+     * @return string
+     */
     public static function HtmlTable($res){
         $html = "";
         if(count($res) > 0) {

@@ -6,6 +6,9 @@
  * Time: 13:35
  */
 
+/**
+ * Class CUser
+ */
 class CUser extends CDatabase {
 
     CONST ACRONYM_LOGGEDIN = "acronym_loggedin";
@@ -15,6 +18,10 @@ class CUser extends CDatabase {
         parent::__construct($options, $debug);
     }
 
+    /**
+     * @param $acronym
+     * @param $password
+     */
     public function Login($acronym, $password){
         $sql = "SELECT acronym, name FROM `user` WHERE acronym = :acronym AND password = md5(concat(:password, salt))";
         $params = array();
@@ -29,20 +36,31 @@ class CUser extends CDatabase {
         }
     }
 
-
+    /**
+     *
+     */
     public function Logout() {
         unset($_SESSION[CUser::ACRONYM_LOGGEDIN]);
         unset($_SESSION[CUser::NAME_LOGGEDIN]);
     }
 
+    /**
+     * @return bool
+     */
     public function IsAuthenticated() {
         return isset($_SESSION[CUser::ACRONYM_LOGGEDIN]);
     }
 
+    /**
+     * @return mixed
+     */
     public function GetAcronym() {
         return $_SESSION[CUser::ACRONYM_LOGGEDIN];
     }
 
+    /**
+     * @return mixed
+     */
     public function GetName() {
         return $_SESSION[CUser::NAME_LOGGEDIN];
     }
