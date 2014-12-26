@@ -105,6 +105,22 @@ class Helpers {
         return $_SESSION["sort"];
     }
 
+    /**
+     * @param $id
+     * @return int
+     */
+    public static function ParseInt($id){
+        return (int)$id;
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public static function IsInt($id){
+       return is_integer($id);
+    }
+
 
 
 } 

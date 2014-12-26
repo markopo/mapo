@@ -95,7 +95,7 @@ class CContent extends CDatabase {
      * @return mixed
      */
     public function SelectOne($id) {
-        $sql = "SELECT * FROM Content WHERE id = :id";
+        $sql = "SELECT * FROM `content` WHERE id = :id";
         $param = array();
         $param[":id"] = array($id);
         return parent::Fetch($sql, $param);

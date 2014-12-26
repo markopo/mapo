@@ -42,8 +42,8 @@ class HtmlCContent {
                 $html .= "<td><span>{$r->created}</span></td>";
                 $html .= "<td><span>{$r->updated}</span></td>";
                 $html .= "<td><span>{$r->deleted}</span></td>";
-                $html .= "<td><a class='edit-content-link' href='#edit-<".$r->id."'>edit</a></td>";
-                $html .= "<td><a class='delete-content-link' href='#delete-<".$r->id."'>delete</a></td>";
+                $html .= "<td><a class='edit-content-link' href='?editcontent=<".$r->id."'>edit</a></td>";
+                $html .= "<td><a class='delete-content-link' href='?deletecontent=<".$r->id."'>delete</a></td>";
                 $html .= "</tr>";
             }
 
@@ -55,4 +55,56 @@ class HtmlCContent {
 
     }
 
+
+
+    /**
+     * @param $content
+     * @return string
+     */
+    public static function EditContent($content){
+        $html = "";
+        $html .= "<table>";
+     //   $html .= HtmlCContent::TableRowHidden()
+
+        $html .= "</table>";
+        return $html;
+    }
+
+    /**
+     * id
+    slug
+    type
+    title
+    data
+    filter
+    published
+    created
+    updated
+    deleted
+     */
+
+    /**
+     * @param $content
+     * @return string
+     */
+    public static function DeleteContent($content){
+        $html = "";
+        $html .= "<table>";
+
+
+        $html .= "</table>";
+        return $html;
+    }
+
+    /**
+     * @return string
+     */
+    public static function AddContent() {
+        $html = "";
+        $html .= "<table>";
+
+
+        $html .= "</table>";
+        return $html;
+    }
 }

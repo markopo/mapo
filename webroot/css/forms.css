@@ -49,3 +49,8 @@ label span,
 legend span {
     font-weight: normal;
     color: #444; }
+
+
+.table-cell-textarea {
+    width: 100%;
+}
