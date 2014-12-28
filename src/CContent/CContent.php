@@ -47,47 +47,74 @@ class CContent extends CDatabase {
     /**
      *
      */
-    public function DeleteAll() {
+    public function DeleteAllContent() {
         $sql = "DELETE FROM Content";
         parent::Execute($sql);
     }
 
     /**
      * @param $id
+     * @param bool $reallyDelete
+     * @return int
      */
-    public function DeleteById($id) {
-        $sql = "DELETE FROM Content WHERE id = :id";
+    public function DeleteById($id, $reallyDelete = false) {
+
+        $sql = "UPDATE Content SET
+                deleted = NOW()
+                WHERE id = :id";
+
+        if($reallyDelete == true) {
+            $sql = "DELETE FROM Content WHERE id = :id";
+        }
+
+
         $params = array();
         $params[":id"] = array($id);
-        parent::ExecuteWithParams($sql, $params);
+        return parent::ExecuteWithParams($sql, $params);
     }
 
     /**
      * @param $param
+     * @return int
+     */
+    public function Insert($param){
+
+        $sql = "insert into Content(slug,type,title,data,filter,published) values(:slug,:type,:title,:data,:filter, now())";
+
+        $params =  array();
+        $params[":title"] = array($param->title);
+        $params[":slug"] = array($param->slug);
+        $params[":data"] = array($param->data);
+        $params[":type"] = array($param->type);
+        $params[":filter"] = array($param->filter);
+
+        return parent::ExecuteWithParams($sql, $params);
+    }
+
+    /**
+     * @param $param
+     * @return int
      */
     public function Update($param){
         $sql = "UPDATE Content SET
                 title = :title,
                 slug = :slug,
-                url = :url,
                 data = :data,
                 type = :type,
                 filter = :filter,
-                published = :published,
                 updated = NOW()
                 WHERE id = :id
                 ";
 
             $params =  array();
+            $params[":id"] = array($param->id);
             $params[":title"] = array($param->title);
             $params[":slug"] = array($param->slug);
-            $params[":url"] = array($param->url);
             $params[":data"] = array($param->data);
             $params[":type"] = array($param->type);
             $params[":filter"] = array($param->filter);
-            $params[":published"] = array($param->published);
 
-            parent::ExecuteWithParams($sql, $params);
+         return parent::ExecuteWithParams($sql, $params);
     }
 
     /**
@@ -105,7 +132,23 @@ class CContent extends CDatabase {
      * @return array
      */
     public function SelectAll(){
-        $sql = "select id,type,title,published,created,updated,deleted from `content` order by id asc ";
+        $sql = "SELECT * FROM `content` ORDER BY id ASC";
+        return parent::FetchAll($sql);
+    }
+
+    /**
+     * @return array
+     */
+    public function SelectAllPages(){
+        $sql = "SELECT * FROM `content` WHERE deleted is null and type = 'page' ORDER BY id ASC";
+        return parent::FetchAll($sql);
+    }
+
+    /**
+     * @return array
+     */
+    public function SelectAllBlog(){
+        $sql = "SELECT * FROM `content` WHERE deleted is null and type = 'blog' ORDER BY id ASC";
         return parent::FetchAll($sql);
     }
 

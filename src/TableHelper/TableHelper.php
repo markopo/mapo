@@ -75,9 +75,22 @@ class TableHelper {
      * @param $value
      * @return string
      */
+    public static function TableRowNormalData($name, $value){
+        return "<tr>
+                <td>{$name}</td>
+                <td><span>{$value}</span></td>
+                </tr>";
+    }
+
+
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public static function TableRowSubmit($name, $value){
         $html = "<tr>";
-        $html .= "<td></td><td class='table-cell-textarea'><input type'submit' id='{$name}' name='{$name}' value='{$value}' ></td>";
+        $html .= "<td></td><td class='table-cell-textarea'><input type='submit' id='{$name}' name='{$name}' value='{$value}' ></td>";
         $html .= "</tr>";
         return $html;
     }

@@ -11,6 +11,13 @@
  */
 class HtmlCContent {
 
+    CONST TYPEPAGE = "page";
+    CONST TYPEBLOG = "blog";
+
+    public static function GetContentTypes() {
+        return array(HtmlCContent::TYPEBLOG, HtmlCContent::TYPEPAGE);
+    }
+
     /**
      * @param $res
      * @return string
@@ -42,8 +49,8 @@ class HtmlCContent {
                 $html .= "<td><span>{$r->created}</span></td>";
                 $html .= "<td><span>{$r->updated}</span></td>";
                 $html .= "<td><span>{$r->deleted}</span></td>";
-                $html .= "<td><a class='edit-content-link' href='?editcontent=<".$r->id."'>edit</a></td>";
-                $html .= "<td><a class='delete-content-link' href='?deletecontent=<".$r->id."'>delete</a></td>";
+                $html .= "<td><a class='edit-content-link' href='?editcontent=".$r->id."'>edit</a></td>";
+                $html .= "<td><a class='delete-content-link' href='?deletecontent=".$r->id."'>delete</a></td>";
                 $html .= "</tr>";
             }
 
@@ -62,37 +69,35 @@ class HtmlCContent {
      * @return string
      */
     public static function EditContent($content){
-        $html = "";
-        $html .= "<table>";
-     //   $html .= HtmlCContent::TableRowHidden()
-
+        $html = FormHelper::FormStart();
+        $html .= "<table class='content-table' >";
+        $html .= TableHelper::TableRowInputHidden("id", $content->id);
+        $html .= TableHelper::TableRowInputText("title", $content->title);
+        $html .= TableHelper::TableRowNormalData("slug", $content->slug);
+        $html .= TableHelper::TableRowSelect(HtmlCContent::GetContentTypes(), "type", $content->type);
+        $html .= TableHelper::TableRowTextArea("data", $content->data);
+        $html .= TableHelper::TableRowSubmit("editcontent_save", "spara");
         $html .= "</table>";
+        $html .= FormHelper::FormEnd();
         return $html;
     }
-
-    /**
-     * id
-    slug
-    type
-    title
-    data
-    filter
-    published
-    created
-    updated
-    deleted
-     */
 
     /**
      * @param $content
      * @return string
      */
     public static function DeleteContent($content){
-        $html = "";
-        $html .= "<table>";
-
-
+        $html = FormHelper::FormStart();
+        $html .= "<h3>Vill du verkligen ta bort den här?</h3>";
+        $html .= "<table class='content-table readonly' >";
+        $html .= TableHelper::TableRowInputHidden("id", $content->id);
+        $html .= TableHelper::TableRowInputText("title", $content->title);
+        $html .= TableHelper::TableRowNormalData("slug", $content->slug);
+        $html .= TableHelper::TableRowSelect(HtmlCContent::GetContentTypes(), "type", $content->type);
+        $html .= TableHelper::TableRowTextArea("data", $content->data);
+        $html .= TableHelper::TableRowSubmit("deletecontent_save", "spara");
         $html .= "</table>";
+        $html .= FormHelper::FormEnd();
         return $html;
     }
 
@@ -100,11 +105,14 @@ class HtmlCContent {
      * @return string
      */
     public static function AddContent() {
-        $html = "";
-        $html .= "<table>";
-
-
+        $html = FormHelper::FormStart();
+        $html .= "<table class='content-table' >";
+        $html .= TableHelper::TableRowInputText("title", "");
+        $html .= TableHelper::TableRowSelect(HtmlCContent::GetContentTypes(), "type", "");
+        $html .= TableHelper::TableRowTextArea("data", "");
+        $html .= TableHelper::TableRowSubmit("addcontent_save", "spara");
         $html .= "</table>";
+        $html .= FormHelper::FormEnd();
         return $html;
     }
 }

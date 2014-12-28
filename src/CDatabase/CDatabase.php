@@ -45,7 +45,7 @@ class CDatabase {
         }
 
         $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']);
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     }
 
@@ -53,28 +53,46 @@ class CDatabase {
      * @param $sql
      */
     protected function Execute($sql){
-        $this->db->beginTransaction();
-        $this->db->exec($sql);
-        $this->db->commit();
+        try {
+            $this->db->beginTransaction();
+            $this->db->exec($sql);
+            $this->db->commit();
+
+            if($this->debug == true){
+                $this->debugMessage = $sql;
+            }
+        }
+        catch(PDOException $e){
+            $this->errorMessage = $e->getMessage();
+            $this->db->rollBack();
+        }
     }
 
     /**
      * @param $sql
      * @param array $params
-     *
+     * @return int
      */
     protected function ExecuteWithParams($sql, $params=array()){
-        $this->db->beginTransaction();
-        $this->stmt = $this->db->prepare($sql);
-
-        if(count($params) > 0) {
-            foreach ($params as $key => $value) {
-                $this->stmt->bindParam($key, $value);
+        try {
+            if($this->debug == true){
+                $this->debugMessage = $sql."<br>".Helpers::dump($params);
             }
+
+            $this->db->beginTransaction();
+            $this->stmt = $this->db->prepare($sql);
+            $this->bindParams($params);
+            $this->stmt->execute();
+            $this->db->commit();
+            return (int)$this->db->lastInsertId();
+
+        }
+        catch(PDOException $e){
+            $this->errorMessage = $e->getMessage();
+            $this->db->rollBack();
         }
 
-        $this->stmt->execute();
-        $this->db->commit();
+        return -1;
     }
 
     /**
