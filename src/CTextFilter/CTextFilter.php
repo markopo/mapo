@@ -112,6 +112,7 @@ class CTextFilter {
      * @return string as the formatted html-text.
      */
     public function markdown($text) {
+        require_once(__DIR__ . '/php-markdown/Michelf/MarkdownInterface.php');
         require_once(__DIR__ . '/php-markdown/Michelf/Markdown.php');
         require_once(__DIR__ . '/php-markdown/Michelf/MarkdownExtra.php');
         return \Michelf\MarkdownExtra::defaultTransform($text);

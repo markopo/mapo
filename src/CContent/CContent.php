@@ -92,13 +92,17 @@ class CContent extends CDatabase {
      * @param $param
      */
     public function Update($param){
+
+        $deleteVal = $param->deleted == true ? "NOW()" : "null";
+
         $sql = "UPDATE `content` SET
                 title = :title,
                 slug = :slug,
                 data = :data,
                 type = :type,
                 filter = :filter,
-                updated = NOW()
+                updated = NOW(),
+                deleted = $deleteVal
                 WHERE id = :id
                 ";
 
@@ -146,6 +150,14 @@ class CContent extends CDatabase {
     public function SelectAllBlog(){
         $sql = "SELECT * FROM `content` WHERE deleted is null and type = 'blog' ORDER BY id ASC";
         return parent::FetchAll($sql);
+    }
+
+
+    public function SelectOneBySlug($slug) {
+        $sql = "SELECT * FROM `content` WHERE slug = :slug AND deleted is null LIMIT 1";
+        $param = array();
+        $param[":slug"] = array($slug);
+        return parent::Fetch($sql, $param);
     }
 
 }

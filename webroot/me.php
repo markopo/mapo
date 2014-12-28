@@ -30,7 +30,27 @@ $mapo['main'] = <<< TEMPLATE
 </div>
 
 <div>
-
+<h2>KMOM05 - Lagring i DB</h2>
+<p>Objektorienteringen rullar på, och det känns bra. Är väl i egentligen inga större problem med att koda objektorienterat. Lite underligt är det trots allt i PHP i jämförelse
+med C# - lite mer skriptspråk över det, antagligen ja för att det är ett skriptspråk. Nu blir det en del kataloger med varsin klass. Det kan väl iofs vara bra, men när projektet
+växer - då kan vi säga att vi skapat <a href="http://c2.com/cgi/wiki?RavioliCode">ravioli-kod</a>. På ett sätt är det väl bra, men i längden kanske det är bättre att klumpa ihop det
+i större enheter.
+</p>
+<p>Jag har väl inga problem att tänka objektorienterat när jag programmerar - har ju gjort det rätt länge. Men vad är optimal design? Det är där de svåra frågorna kommer fram.
+</p>
+Det blev en del moduler som CContent, CPage, CBlog, CTextFilter. De större modulerna blev välsignade med en egen instans. Det tycker jag de var värda. Mindre moduler eller sk hjälpfunktioner
+fick förbli vara public static. Det är ju ändå rätt behändigt med det, trots en del motstånd mot public static inom den renläriga objektorienteringsskolan. Men jag är pragmatiker, och gillar att följa iaf
+två regler - <a href="http://en.wikipedia.org/wiki/KISS_principle">KISS</a> och <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>.
+<p>Den funktion som jag kände var mest nyttig var väl CTextFilter - speciellt kanske markdown funktionen. Med den kan skapa mycket skojigt. Annars känns det väl bra också att jag implementerar arv i dataaccess-logiken,
+tycker det skapar bra struktur i applikationerna, och ger mindre repetitivt skrivande. Det är också bra. Sedan börjar man bli mer bekväm med PhpStorm editorn. Tycker den är toppen alltså, bara en sak som sparar oändligt mycket tid
+i ett stort projekt är med F12 på ett metodnamn kan navigera till definitionen på den. Annars är jag också nöjd att jag implementerat transaktioner i PDO när man skriver till databasen. Känns som det är nödvändigt för vilka
+applikationer som helst i egentligen, inte bara affärskritiska. Allt är väl kritiskt eller viktigt för den som använder applikationen. Då vill man ju inte förlora data som man skapat?
+</p>
+<p>Det går ju att pula med sådant hur länge som helst, speciellt om man vill få gränssnittet snyggt och rent och skapa mer behändiga funktioner kring huvudfunktionaliteten i det oändliga. Men överlag är jag nöjd.
+CContent tog ju mest tid att implementera. Annars har julen varit bra, mycket mat och dryck har det blivit och en och annan julklapp fick man av tomten också.
+</p>
+<p>Hyvää joulua!</p>
+<br>
 <h2>KMOM04 - PDO och MySql</h2>
 <p>Jag har inte gjort efter övningen rakt av, utan gjort efter eget huvud vad jag tyckte verkade vara bra. För övrigt tycker jag paginering och sortering i dagens läge borde
 skötas av klienten, genom javascript företrädesvis för det är trots allt Webb det här handlar om. Tycker väl att det nästan blir bökigare att bygga så här mycket funktionalitet genom

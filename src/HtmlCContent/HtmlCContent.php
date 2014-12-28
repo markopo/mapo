@@ -75,6 +75,7 @@ class HtmlCContent {
         $html .= TableHelper::TableRowSelect(CTextFilter::getFilters(), "filter", $content->filter);
         $html .= TableHelper::TableRowSelect(HtmlCContent::GetContentTypes(), "type", $content->type);
         $html .= TableHelper::TableRowTextArea("data", $content->data);
+        $html .= TableHelper::TableRowCheckBox("deleted", $content->deleted);
         $html .= TableHelper::TableRowSubmit("editcontent_save", "spara");
         $html .= "</table>";
         $html .= FormHelper::FormEnd();

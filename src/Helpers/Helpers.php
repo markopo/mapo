@@ -49,6 +49,17 @@ class Helpers {
     }
 
     /**
+     * @param $val
+     * @return string
+     */
+    public static function PostOrEmpty($val){
+        if(isset($_POST[$val]) && !empty($_POST[$val])){
+            return trim($_POST[$val]);
+        }
+        return "";
+    }
+
+    /**
      * @param $str
      * @return string
      */
@@ -129,7 +140,7 @@ class Helpers {
      * @returns str the formatted slug.
      */
     public static function MakeSlug($str) {
-        $str = mb_strtolower(trim($str));
+        $str = mb_strtolower(trim($str), 'UTF-8');
         $str = str_replace(array('å','ä','ö'), array('a','a','o'), $str);
         $str = preg_replace('/[^a-z0-9-]/', '-', $str);
         $str = trim(preg_replace('/-+/', '-', $str), '-');

@@ -69,6 +69,19 @@ class TableHelper {
         return $html;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
+    public static function TableRowCheckBox($name, $value){
+        $checked = $value != null ? "checked" : "";
+        return "<tr>
+                <td><label for='{$name}'>{$name}</label></td>
+                <td><input type='checkbox' id='{$name}' name='{$name}' {$checked} value='1' ></td>
+                </tr>";
+    }
+
 
     /**
      * @param $name

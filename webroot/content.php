@@ -2,7 +2,7 @@
 
 include(__DIR__.'/config.php');
 
-// echo var_dump($_POST);
+ // echo var_dump($_POST);
 
 $alterMode = false;
 $editcontentId = Helpers::GetIsSetOrNull("editcontent");
@@ -29,8 +29,10 @@ if($editcontent_save != null){
     $updateParam->type = Helpers::PostIsSetOrNull("type");
     $updateParam->title = Helpers::PostIsSetOrNull("title");
     $updateParam->slug = Helpers::MakeSlug($updateParam->title);
-    $updateParam->data = Helpers::PostIsSetOrNull("data");
+    $updateParam->data = Helpers::PostOrEmpty("data");
     $updateParam->filter = Helpers::PostIsSetOrNull("filter");
+    $updateParam->deleted = Helpers::PostIsSetOrNull("deleted");
+    $updateParam->deleted = $updateParam->deleted == '1' ? true : false;
 
     $cContent->Update($updateParam);
 
@@ -57,7 +59,7 @@ if($addcontent_save != null){
     $saveParam->type = Helpers::PostIsSetOrNull("type");
     $saveParam->title = Helpers::PostIsSetOrNull("title");
     $saveParam->slug = Helpers::MakeSlug($saveParam->title);
-    $saveParam->data = Helpers::PostIsSetOrNull("data");
+    $saveParam->data = Helpers::PostOrEmpty("data");
     $saveParam->filter = Helpers::PostIsSetOrNull("filter");
 
     $cContent->Insert($saveParam);
