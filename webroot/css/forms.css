@@ -15,8 +15,6 @@ select {
     background: #fff;
 }
 
-select {
-    padding: 0; }
 
 input[type="text"]:focus,
 input[type="password"]:focus,
@@ -49,3 +47,8 @@ label span,
 legend span {
     font-weight: normal;
     color: #444; }
+
+
+.table-cell-textarea {
+    width: 100%;
+}

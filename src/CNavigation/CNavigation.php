@@ -1,6 +1,14 @@
 <?php
 
+/**
+ * Class CNavigation
+ */
 class CNavigation {
+
+    /**
+     * @param $menu
+     * @return string
+     */
     public static function GenerateMenu($menu) {
 
         if(isset($menu['callback'])) {

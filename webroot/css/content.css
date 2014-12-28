@@ -1,0 +1,38 @@
+.ccontent-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ccontent-table th {
+    background: #333333;
+    color: #fff;
+    padding: 5px 2px;
+}
+
+.ccontent-table td {
+    border-bottom: 1px solid #333333;
+    padding: 5px 2px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+.content-table {
+    padding: 5px 2px;
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+.content-table td {
+    padding: 5px 2px;
+}
+
+.content-table input[type=text] {
+    width: 220px;
+}
+
+.content-table textarea {
+    width: 450px;
+    height: 350px;
+}

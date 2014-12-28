@@ -6,16 +6,19 @@
  * Time: 13:34
  */
 
+/**
+ * Class CDatabase
+ */
 class CDatabase {
 
     /**
      * Members
      */
-    private $options;                   // Options used when creating the PDO object
-    private $db   = null;               // The PDO object
-    private $stmt = null;               // The latest statement used to execute a query
+    protected $options;                   // Options used when creating the PDO object
+    protected $db   = null;               // The PDO object
+    protected $stmt = null;               // The latest statement used to execute a query
 
-    private $debug;
+    public $debug;
 
     public $errorMessage = "";
     public $debugMessage = "";
@@ -42,16 +45,115 @@ class CDatabase {
         }
 
         $this->db->SetAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, $this->options['fetch_style']);
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     }
 
+    /**
+     * @param $sql
+     */
+    protected function Execute($sql){
+        try {
+            $this->db->beginTransaction();
+            $this->db->exec($sql);
+            $this->db->commit();
 
+            if($this->debug == true){
+                $this->debugMessage = $sql;
+            }
+        }
+        catch(PDOException $e){
+            $this->errorMessage = $e->getMessage();
+            $this->db->rollBack();
+        }
+    }
 
+    /**
+     * @param $sql
+     * @param array $params
+     */
+    protected function ExecuteWithParams($sql, $params=array()){
+        try {
+            if($this->debug == true){
+                $this->debugMessage = $sql."<br>".Helpers::dump($params);
+            }
 
+            $this->db->beginTransaction();
+            $this->stmt = $this->db->prepare($sql);
+            $this->bindParams($params);
+            $this->stmt->execute();
+            $this->db->commit();
+        }
+        catch(PDOException $e){
+            $this->errorMessage = $e->getMessage();
+            $this->db->rollBack();
+        }
 
+    }
 
-    private function HasWhereInSql($sql){
+    /**
+     * @param $sql
+     * @param array $params
+     * @return array
+     */
+    protected function FetchAll($sql, $params=array()){
+        $this->stmt = $this->db->prepare($sql);
+        try {
+            $this->bindParams($params);
+
+            $this->stmt->execute();
+        }
+        catch (PDOException $e)
+        {
+            $this->errorMessage = __METHOD__. ": ".$e->getMessage();
+
+        }
+        return $this->stmt->fetchAll();
+    }
+
+    /**
+     * @param $sql
+     * @param array $params
+     * @return mixed
+     */
+    protected function Fetch($sql, $params=array()){
+        try {
+
+            $this->stmt = $this->db->prepare($sql);
+
+            $this->bindParams($params);
+
+            $this->stmt->execute();
+            $res = $this->stmt->fetch();
+        }
+        catch (PDOException $e)
+        {
+            $this->errorMessage = __METHOD__. ": ".$e->getMessage();
+        }
+        return $res;
+    }
+
+    /**
+     * @param $params
+     */
+    private function bindParams($params){
+        if(count($params) > 0) {
+            foreach ($params as $key => $value) {
+                if(count($value) == 1) {
+                    $this->stmt->bindParam($key, $value[0]);
+                }
+                else if(count($value) == 2) {
+                    $this->stmt->bindParam($key, $value[0], $value[1]);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param $sql
+     * @return string
+     */
+    protected function HasWhereInSql($sql){
         if(strpos($sql, "WHERE") == false){
             $sql .= "WHERE ";
         }

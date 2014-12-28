@@ -6,6 +6,9 @@
  * Time: 19:05
  */
 
+/**
+ * Class Calendar
+ */
 class Calendar {
 
 
@@ -32,6 +35,13 @@ class Calendar {
 
     }
 
+    /**
+     * @param $year
+     * @param $month
+     * @param $day
+     * @param $iscurrentMonth
+     * @return CalendarDay
+     */
     private function createDate($year, $month, $day, $iscurrentMonth){
         $day = date("d", mktime(0, 0, 0, $month, $day, $year));
         $month = date("m", mktime(0, 0, 0, $month, $day, $year));
@@ -42,11 +52,24 @@ class Calendar {
         return new CalendarDay($year, $month, $day, $this->SwedishDayNames[$dayname], $week, $iscurrentMonth);
     }
 
+
+    /**
+     * @param $year
+     * @param $month
+     * @param $day
+     * @return mixed
+     */
     private function firstIndexOfDayInMonth($year, $month, $day) {
        $dayname = date("D", mktime(0, 0, 0, $month, $day, $year));
        return array_search($dayname, array_keys($this->SwedishDayNames));
     }
 
+    /**
+     * @param $year
+     * @param $month
+     * @param $firstday
+     * @return array
+     */
     private function getDaysOfPreviousMonth($year, $month, $firstday){
         $daysInMonth = (int)date('t', mktime(0, 0, 0, $month, 1, $year));
         $daysPrevMonth = array();
@@ -56,16 +79,30 @@ class Calendar {
         return $daysPrevMonth;
     }
 
+
+    /**
+     * @param $year
+     * @param $month
+     * @return int
+     */
     private function getDaysInMonth($year, $month){
         return (int)date('t', mktime(0, 0, 0, $month, 1, $year));
     }
 
+    /**
+     * @param $month
+     * @return mixed
+     */
     public function getMonthName($month){
         $monthName = date("M", mktime(0, 0, 0, $month, 1, $this->currentYear));
         return $this->SwedishMonthNames[$monthName];
     }
 
 
+    /**
+     * @param $month
+     * @return string
+     */
     public function getMonthBabe($month) {
         $monthName = strtolower(date("M", mktime(0, 0, 0, $month, 1, $this->currentYear)));
         $host = "http://".$_SERVER['HTTP_HOST'];
@@ -73,6 +110,11 @@ class Calendar {
         return "$host$url/img/babes/$monthName.jpg";
     }
 
+    /**
+     * @param $year
+     * @param $month
+     * @return array
+     */
     public function getCalendar($year, $month){
 
         if($year == null) {

@@ -59,5 +59,10 @@ TEMPLATE;
 
 $mapo['footer'] = Template::Footer();
 
+$mapo["pagescript"] = <<< TEMPLATE
+    appendScript("js/login.js");
+
+TEMPLATE;
+
 
 include(MAPO_THEME_PATH);

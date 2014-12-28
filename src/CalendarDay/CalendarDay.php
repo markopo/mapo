@@ -6,6 +6,10 @@
  * Time: 17:04
  */
 
+
+/**
+ * Class CalendarDay
+ */
 class CalendarDay {
 
      public $Year;

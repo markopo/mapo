@@ -6,8 +6,14 @@
  * Time: 19:10
  */
 
+/**
+ * Class Template
+ */
 class Template {
 
+    /**
+     * @return string
+     */
     public static function Header() {
         $header = "
             <img class='sitelogo' src='img/mapo.png' alt='Mapo Logo'/> <div class='sitetitle'> - Mapo - Objektorienterad PHP</div>
@@ -17,7 +23,9 @@ class Template {
         return $header;
     }
 
-
+    /**
+     * @return string
+     */
     public static function Footer() {
         $footer = "
             <div>
