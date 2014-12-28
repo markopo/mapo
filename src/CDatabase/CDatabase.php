@@ -71,7 +71,6 @@ class CDatabase {
     /**
      * @param $sql
      * @param array $params
-     * @return int
      */
     protected function ExecuteWithParams($sql, $params=array()){
         try {
@@ -84,15 +83,12 @@ class CDatabase {
             $this->bindParams($params);
             $this->stmt->execute();
             $this->db->commit();
-            return (int)$this->db->lastInsertId();
-
         }
         catch(PDOException $e){
             $this->errorMessage = $e->getMessage();
             $this->db->rollBack();
         }
 
-        return -1;
     }
 
     /**
@@ -133,7 +129,6 @@ class CDatabase {
         catch (PDOException $e)
         {
             $this->errorMessage = __METHOD__. ": ".$e->getMessage();
-
         }
         return $res;
     }

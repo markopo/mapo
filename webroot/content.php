@@ -18,7 +18,7 @@ if(!$isLoggedIn){
 /**
  * cContent instance
  */
-$cContent = new CContent($mapo['database'], true);
+$cContent = new CContent($mapo['database']);
 
 
 /** update -- post */
@@ -32,8 +32,8 @@ if($editcontent_save != null){
     $updateParam->data = Helpers::PostIsSetOrNull("data");
     $updateParam->filter = Helpers::PostIsSetOrNull("filter");
 
-    $editcontentId = $cContent->Update($updateParam);
-    $alterMode = true;
+    $cContent->Update($updateParam);
+
     $_POST = array();
 }
 
@@ -41,9 +41,12 @@ if($editcontent_save != null){
 $deletecontent_save = Helpers::PostIsSetOrNull("deletecontent_save");
 if($deletecontent_save != null){
     $deleteid = Helpers::PostIsSetOrNull("id");
-
-    $deletecontentId = $cContent->DeleteById($deleteid);
-    $alterMode = true;
+    if($deleteid != null){
+       $deleteid = Helpers::ParseInt($deleteid);
+       if(Helpers::IsInt($deleteid)){
+           $cContent->DeleteById($deleteid);
+       }
+    }
     $_POST = array();
 }
 
@@ -57,11 +60,7 @@ if($addcontent_save != null){
     $saveParam->data = Helpers::PostIsSetOrNull("data");
     $saveParam->filter = Helpers::PostIsSetOrNull("filter");
 
-    $editcontentId = $cContent->Insert($saveParam);
-
-
-
-    $alterMode = true;
+    $cContent->Insert($saveParam);
     $_POST = array();
 }
 
@@ -122,7 +121,7 @@ if($alterMode == false) {
     }
 }
 
-$errormessage = $cContent->errorMessage;
+$errormessage = !empty($cContent->errorMessage) ? '<p class="error-message">'.$cContent->errorMessage.'</p><br>' : "";
 
 //$debugMessage = $cContent->debugMessage;
 
@@ -132,7 +131,7 @@ $mapo['main'] = <<< TEMPLATE
 <div>
 <a href="?action=add">Lägg till ny</a>
 </div>
-<p class="error-message">$errormessage</p>
+$errormessage
 <div class="content-wrapper">
 $contentTable
 </div>

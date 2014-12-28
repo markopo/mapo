@@ -21,7 +21,7 @@ class CContent extends CDatabase {
      */
     public function Create() {
 
-        $sql = "CREATE TABLE Content(
+        $sql = "CREATE TABLE `content`(
                     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                     slug CHAR(80) UNIQUE,
                     type CHAR(80),
@@ -40,7 +40,7 @@ class CContent extends CDatabase {
      *
      */
     public function Drop() {
-        $sql = "DROP TABLE IF EXISTS Content;";
+        $sql = "DROP TABLE IF EXISTS `content`;";
         parent::Execute($sql);
     }
 
@@ -48,38 +48,35 @@ class CContent extends CDatabase {
      *
      */
     public function DeleteAllContent() {
-        $sql = "DELETE FROM Content";
+        $sql = "DELETE FROM `content`";
         parent::Execute($sql);
     }
 
     /**
      * @param $id
      * @param bool $reallyDelete
-     * @return int
      */
     public function DeleteById($id, $reallyDelete = false) {
 
-        $sql = "UPDATE Content SET
+        $sql = "UPDATE `content` SET
                 deleted = NOW()
                 WHERE id = :id";
 
         if($reallyDelete == true) {
-            $sql = "DELETE FROM Content WHERE id = :id";
+            $sql = "DELETE FROM `content` WHERE id = :id";
         }
-
 
         $params = array();
         $params[":id"] = array($id);
-        return parent::ExecuteWithParams($sql, $params);
+        parent::ExecuteWithParams($sql, $params);
     }
 
     /**
      * @param $param
-     * @return int
      */
     public function Insert($param){
 
-        $sql = "insert into Content(slug,type,title,data,filter,published) values(:slug,:type,:title,:data,:filter, now())";
+        $sql = "insert into `content`(slug,type,title,data,filter,published) values(:slug,:type,:title,:data,:filter, now())";
 
         $params =  array();
         $params[":title"] = array($param->title);
@@ -88,15 +85,14 @@ class CContent extends CDatabase {
         $params[":type"] = array($param->type);
         $params[":filter"] = array($param->filter);
 
-        return parent::ExecuteWithParams($sql, $params);
+        parent::ExecuteWithParams($sql, $params);
     }
 
     /**
      * @param $param
-     * @return int
      */
     public function Update($param){
-        $sql = "UPDATE Content SET
+        $sql = "UPDATE `content` SET
                 title = :title,
                 slug = :slug,
                 data = :data,
@@ -114,7 +110,7 @@ class CContent extends CDatabase {
             $params[":type"] = array($param->type);
             $params[":filter"] = array($param->filter);
 
-         return parent::ExecuteWithParams($sql, $params);
+         parent::ExecuteWithParams($sql, $params);
     }
 
     /**

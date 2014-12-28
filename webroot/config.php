@@ -57,7 +57,7 @@ $mapo['title_append'] = ' | mapo en webbtemplate';
  * Theme related settings.
  *
  */
-$mapo['stylesheets'] = array('css/style.css', 'css/babes.css', 'css/movies.css', 'css/forms.css');
+$mapo['stylesheets'] = array('css/style.css', 'css/babes.css', 'css/movies.css', 'css/forms.css', 'css/content.css');
 $mapo['favicon']    = 'mapo.png';
 
 

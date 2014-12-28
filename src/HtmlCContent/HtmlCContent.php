@@ -31,7 +31,6 @@ class HtmlCContent {
             $html .= "<th>type</th>";
             $html .= "<th>title</th>";
             $html .= "<th>published</th>";
-            $html .= "<th>created</th>";
             $html .= "<th>updated</th>";
             $html .= "<th>deleted</th>";
             $html .= "<th></th>";
@@ -45,10 +44,9 @@ class HtmlCContent {
                 $html .= "<td><span>{$r->id}</span></td>";
                 $html .= "<td><span>{$r->type}</span></td>";
                 $html .= "<td><span>{$r->title}</span></td>";
-                $html .= "<td><span>{$r->published}</span></td>";
-                $html .= "<td><span>{$r->created}</span></td>";
-                $html .= "<td><span>{$r->updated}</span></td>";
-                $html .= "<td><span>{$r->deleted}</span></td>";
+                $html .= "<td><span>".DateFormat::Ymd_Hi($r->published)."</span></td>";
+                $html .= "<td><span>".DateFormat::Ymd_Hi($r->updated)."</span></td>";
+                $html .= "<td><span>".DateFormat::Ymd_Hi($r->deleted)."</span></td>";
                 $html .= "<td><a class='edit-content-link' href='?editcontent=".$r->id."'>edit</a></td>";
                 $html .= "<td><a class='delete-content-link' href='?deletecontent=".$r->id."'>delete</a></td>";
                 $html .= "</tr>";
@@ -74,6 +72,7 @@ class HtmlCContent {
         $html .= TableHelper::TableRowInputHidden("id", $content->id);
         $html .= TableHelper::TableRowInputText("title", $content->title);
         $html .= TableHelper::TableRowNormalData("slug", $content->slug);
+        $html .= TableHelper::TableRowSelect(CTextFilter::getFilters(), "filter", $content->filter);
         $html .= TableHelper::TableRowSelect(HtmlCContent::GetContentTypes(), "type", $content->type);
         $html .= TableHelper::TableRowTextArea("data", $content->data);
         $html .= TableHelper::TableRowSubmit("editcontent_save", "spara");
@@ -91,10 +90,11 @@ class HtmlCContent {
         $html .= "<h3>Vill du verkligen ta bort den här?</h3>";
         $html .= "<table class='content-table readonly' >";
         $html .= TableHelper::TableRowInputHidden("id", $content->id);
-        $html .= TableHelper::TableRowInputText("title", $content->title);
+        $html .= TableHelper::TableRowNormalData("title", $content->title);
         $html .= TableHelper::TableRowNormalData("slug", $content->slug);
-        $html .= TableHelper::TableRowSelect(HtmlCContent::GetContentTypes(), "type", $content->type);
-        $html .= TableHelper::TableRowTextArea("data", $content->data);
+        $html .= TableHelper::TableRowNormalData("filter", $content->filter);
+        $html .= TableHelper::TableRowNormalData("type", $content->type);
+        $html .= TableHelper::TableRowParagraph("data", $content->data);
         $html .= TableHelper::TableRowSubmit("deletecontent_save", "spara");
         $html .= "</table>";
         $html .= FormHelper::FormEnd();
@@ -108,6 +108,7 @@ class HtmlCContent {
         $html = FormHelper::FormStart();
         $html .= "<table class='content-table' >";
         $html .= TableHelper::TableRowInputText("title", "");
+        $html .= TableHelper::TableRowSelect(CTextFilter::getFilters(), "filter", "");
         $html .= TableHelper::TableRowSelect(HtmlCContent::GetContentTypes(), "type", "");
         $html .= TableHelper::TableRowTextArea("data", "");
         $html .= TableHelper::TableRowSubmit("addcontent_save", "spara");

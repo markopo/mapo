@@ -77,8 +77,20 @@ class TableHelper {
      */
     public static function TableRowNormalData($name, $value){
         return "<tr>
-                <td>{$name}</td>
+                <td><label for='{$name}'>{$name}</label></td>
                 <td><span>{$value}</span></td>
+                </tr>";
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
+    public static function TableRowParagraph($name, $value){
+        return "<tr>
+                <td><label for='{$name}'>{$name}</label></td>
+                <td><p style='width:450px;height:auto;'>{$value}</p></td>
                 </tr>";
     }
 
