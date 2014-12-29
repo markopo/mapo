@@ -25,7 +25,7 @@ $htmlAllBlog = $slug == null ? $cBlog->ShowAllBlogs($blogs) : "";
 
 
 $mapo['main'] = <<< TEMPLATE
-<h2>Page</h2>
+<h2>Blog</h2>
 <div>$htmlAllBlog</div>
 <div>$slugPage</div>
 TEMPLATE;
