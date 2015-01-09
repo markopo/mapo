@@ -16,3 +16,6 @@ Thumbs.db
 
 #phpstorm settings
 .idea/workspace.xml
+
+#img
+img/cache
