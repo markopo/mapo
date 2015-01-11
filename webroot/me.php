@@ -30,6 +30,29 @@ $mapo['main'] = <<< TEMPLATE
 </div>
 
 <div>
+<h2>KMOM06 - Bildhantering & galleri</h2>
+<p>Jag har en del programmeringserfarenhet av att jobba med bilder sedan tidigare. Mest med kanske .NET:s GDI+ med C# och sedan har jag jobbat lite med bildmanipulation med Actionscript 3 i Flash också. Det är väl
+de språken som jag mest har manipulerat bilder med. Fast iofs kände jag tidigare till ImageMagick, har läst lite om det men inte gjort något direkt med det, kanske skulle prova det. Verkar som ImageMagick
+har aningen lite mer features än GD, iaf om man läser om den här <a href="http://www.sitepoint.com/imagick-vs-gd/">artikeln</a>, men båda är bra och GD täcker väl de flesta behov man kan tänkas ha. Annars hittade
+jag en trevlig jämförelse mellan GD, ImageMagick och Photoshop <a href="https://foliovision.com/2010/03/imagemagick-vs-gd">här</a>. Då kan man ju få en bild av vilket verktyg man behöver vid vilket behov.
+</p>
+<p>Det kändes väl ganska bra att jobba i GD och det är väl en bra samling av funktioner som finns där och PHP dokumentationen är ju behjälplig om man vill läsa mer om funktionerna. Det svåraste var väl alla
+parametrarna intill img.php och hålla rätt på dem, för det blev ju ganska många av dem. Det var väl det svåraste med uppgiften. Ett stycke i taget var det ju ganska lätt, men att få alla fungera ihop var lite
+svettigare. Det är ändå en rätt kraftfull bildhanterings-service man gjort. Kanske man skulle göra en variant med Imagemagick istället, och ha fler features till på det? Kanske även bygga ut det med databashantering
+och liknande. Då skulle man ju ha något rätt bra. Annars tycker jag img.php är en bra funktion och jag lärde mig ju mer om cache-headers också, vilket var ju najs.
+</p>
+<p>Jag tycker Anax (Mapo) - min webbtemplaten är rätt bra, skulle vilja ha routing i systemet rätt av iofs, utan att mecka med .htaccess-filer och annat mök. Sen att klasserna i src ligger i en egen folder
+för varje klass är väl inte så snyggt. I egentligen skulle man vilja använda namespaces som är organiserade utefter mappstrukturen i projektet. Det tycker jag är bäst. Sen tycker jag sidkontrollerna är kanske
+en aningen bara, fortfarande en aning för mycket procedurell programmering över det. Det jag i egentligen vill ha är ett riktigt MVC-mönster i projektet, men det här har varit en bra kurs för att lära sig strukturera
+en webbapplikation från grunden, istället för att förlita sig på "magiska" ramverk, som man kanske inte förstår så mycket av som händer under huven. Det som jag tycker kanske känns bäst är väl CDatabase klassen, tycker
+den är ett fullgott dataaccess pattern för att bygga applikationer med, och den använder ju PDO och transaktioner vid skrivoperationer och namngivna parametrar vilket jag tycker är alldeles förträffligt. Så där
+har man ju rätt bra grejer där, rätt av. Annars är jag ganska nöjd med min design på websajten och har lyckats rätt bra med den.
+</p>
+<p>Sen hade jag svårt med tid till studier under julhelgen i och med att man var bortrest en vecka och sedan skulle man flytta vid nyårsskiftet. Det var svårt att hinna med att studera och sätta sig till ro. Nu
+är det fullt ös för att få slutprojektet i hamn innan januari slut så man kan börja med MVC-kursen.
+</p>
+<br style="clear:both;" >
+
 <h2>KMOM05 - Lagring i DB</h2>
 <p>Objektorienteringen rullar på, och det känns bra. Är väl i egentligen inga större problem med att koda objektorienterat. Lite underligt är det trots allt i PHP i jämförelse
 med C# - lite mer skriptspråk över det, antagligen ja för att det är ett skriptspråk. Nu blir det en del kataloger med varsin klass. Det kan väl iofs vara bra, men när projektet
