@@ -10,13 +10,13 @@ define('CACHE_PATH', __DIR__ . '/cache/');
 $message = "";
 
 try {
-    $src = isset($_GET['src']) ? Helpers::strip($_GET['src']) : null;
+    $src = isset($_GET['src']) ? $_GET['src'] : null;
     $verbose = isset($_GET['verbose']) ? true : null;
-    $saveAs = isset($_GET['save-as']) ? Helpers::strip($_GET['save-as']) : null;
-    $quality = isset($_GET['quality']) ? (int)Helpers::strip($_GET['quality']) : 60;
+    $saveAs = isset($_GET['save-as']) ? $_GET['save-as'] : null;
+    $quality = isset($_GET['quality']) ? (int)$_GET['quality'] : 60;
     $ignoreCache = isset($_GET['no-cache']) ? true : null;
-    $newWidth = isset($_GET['width']) ? (int)Helpers::strip($_GET['width']) : null;
-    $newHeight = isset($_GET['height']) ? (int)Helpers::strip($_GET['height']) : null;
+    $newWidth = isset($_GET['width']) ? (int)$_GET['width'] : null;
+    $newHeight = isset($_GET['height']) ? (int)$_GET['height'] : null;
     $cropToFit = isset($_GET['crop-to-fit']) ? true : null;
     $sharpen = isset($_GET['sharpen']) ? true : null;
 }

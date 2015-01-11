@@ -125,6 +125,7 @@ class Helpers {
     }
 
     /**
+     * Check if integer
      * @param $id
      * @return bool
      */
@@ -147,6 +148,39 @@ class Helpers {
         return $str;
     }
 
+    /**
+     * Read files from directory
+     * @param $path
+     * @return array
+     */
+    public static function ReadFilesFromDirectory($path){
+        $files = array();
+        if ($handle = opendir($path)) {
+            while (false !== ($entry = readdir($handle))) {
+                echo "$entry\n";
+                array_push($files, $entry);
+            }
+            closedir($handle);
+        }
+        return $files;
+    }
 
+    /**
+     * Display errormessage - 404 not found
+     * @param $message
+     */
+    public static function DisplayError404Message($message) {
+        header("Status: 404 Not Found");
+        die('img.php says 404 - ' . htmlentities($message));
+    }
 
+    /**
+     * Server host url
+     * @return string
+     */
+    public static function HostUrl() {
+        $host = "http://".$_SERVER['HTTP_HOST'];
+        $url = pathinfo($_SERVER["PHP_SELF"])["dirname"];
+        return "$host$url";
+    }
 } 
