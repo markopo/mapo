@@ -77,7 +77,8 @@ $mapo['navmenu'] = array(
     'logout' => array('text' => 'Logout', 'url' => 'logout.php', 'class'=>null),
     'status' => array('text' => 'Status', 'url' => 'status.php', 'class'=>null),
     'page' => array('text' => 'Page', 'url' => 'page.php', 'class'=>null),
-    'blog' => array('text' => 'Blog', 'url' => 'blog.php', 'class'=>null))
+    'blog' => array('text' => 'Blog', 'url' => 'blog.php', 'class'=>null),
+    'gallery' => array('text' => 'Gallery', 'url' => 'gallery.php', 'class'=>null))
 );
 
 /**

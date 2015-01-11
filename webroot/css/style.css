@@ -111,8 +111,8 @@ header {
     display: inline-block;
     text-align: center;
     margin: 0;
-    padding: 10px;
-    width: 100px;
+    padding: 10px 5px;
+    width: 90px;
     background: #ccc;
     color: #333;
     text-decoration: none;
