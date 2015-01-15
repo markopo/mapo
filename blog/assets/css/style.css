@@ -1,0 +1,28 @@
+
+
+
+#blogControllerContainer .search {
+    padding: 20px 0;
+}
+
+.noresults {
+    background: #f2dede;
+}
+
+#blogControllerContainer button, #blogControllerContainer input {
+    font-size: 18px;
+}
+
+#blogControllerContainer #search {
+    width: 200px;
+}
+
+#blogControllerContainer section.well {
+    padding: 20px 0;
+    min-width: 320px;
+    max-width: 960px;
+}
+
+#blogControllerContainer section.well h3,#blogControllerContainer section.well p {
+    padding: 5px 20px;
+}
