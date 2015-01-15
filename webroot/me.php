@@ -30,6 +30,12 @@ $mapo['main'] = <<< TEMPLATE
 </div>
 
 <div>
+<h2>KMOM07 - Projektarbete</h2>
+<div>
+
+</div>
+
+
 <h2>KMOM06 - Bildhantering & galleri</h2>
 <p>Jag har en del programmeringserfarenhet av att jobba med bilder sedan tidigare. Mest med kanske .NET:s GDI+ med C# och sedan har jag jobbat lite med bildmanipulation med Actionscript 3 i Flash också. Det är väl
 de språken som jag mest har manipulerat bilder med. Fast iofs kände jag tidigare till ImageMagick, har läst lite om det men inte gjort något direkt med det, kanske skulle prova det. Verkar som ImageMagick
