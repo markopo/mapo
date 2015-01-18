@@ -45,6 +45,28 @@ class TableHelper {
         return $html;
     }
 
+
+    /**
+     * @param $values
+     * @param $name
+     * @param string $checked
+     * @return string
+     */
+    public static function TableRowRadio($values, $name, $checked = ""){
+        $html = "<tr>";
+        $html .= "<td><label for='{$name}'>{$name}</label></td>";
+        $html .= "<td><ul style='list-style:none;margin: 25px 0 0 0;padding:0;'> ";
+
+        foreach($values as $v){
+            $selectedVal = strpos($checked, $v) !== false ? "checked" : "";
+            $html .= "<li><i style='width:50px;'>{$v}</i> <input type='checkbox' id='{$name}[{$v}]' name='{$name}[{$v}]' {$selectedVal} value='{$v}'></li>";
+        }
+
+        $html .= "</ul></td>";
+        $html .= "</tr>";
+        return $html;
+    }
+
     /**
      * @param $name
      * @param $value

@@ -48,6 +48,20 @@ class Helpers {
         return null;
     }
 
+
+    /**
+     * @param $val
+     * @return null|string
+     */
+    public static function PostArrayIsSetOrNull($val){
+        if(isset($_POST[$val]) && !empty($_POST[$val])){
+            $raw = $_POST[$val];
+            return Helpers::strip(implode(",", $raw));
+        }
+        return null;
+    }
+
+
     /**
      * @param $val
      * @return string

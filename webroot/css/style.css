@@ -160,3 +160,14 @@ footer {
     min-width: 640px;
     max-width: 960px;
 }
+
+.blogpost {
+    margin: 15px 0;
+    padding: 15px 20px;
+    background: #fafafa;
+    border-radius: 8px;
+}
+
+.blogpost h3 {
+    padding: 5px 0;
+}
