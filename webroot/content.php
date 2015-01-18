@@ -21,10 +21,6 @@ if(!$isLoggedIn){
 $cContent = new CContent($mapo['database']);
 
 
-
-echo Helpers::PostArrayIsSetOrNull("filter");
-
-
 /** update -- post */
 $editcontent_save = Helpers::PostIsSetOrNull("editcontent_save");
 if($editcontent_save != null){
