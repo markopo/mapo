@@ -72,7 +72,7 @@ class HtmlCContent {
         $html .= TableHelper::TableRowInputHidden("id", $content->id);
         $html .= TableHelper::TableRowInputText("title", $content->title);
         $html .= TableHelper::TableRowNormalData("slug", $content->slug);
-        $html .= TableHelper::TableRowSelect(CTextFilter::getFilters(), "filter", $content->filter);
+        $html .= TableHelper::TableRowRadio(CTextFilter::getFilters(), "filter", $content->filter);
         $html .= TableHelper::TableRowSelect(HtmlCContent::GetContentTypes(), "type", $content->type);
         $html .= TableHelper::TableRowTextArea("data", $content->data);
         $html .= TableHelper::TableRowCheckBox("deleted", $content->deleted);
@@ -109,7 +109,7 @@ class HtmlCContent {
         $html = FormHelper::FormStart();
         $html .= "<table class='content-table' >";
         $html .= TableHelper::TableRowInputText("title", "");
-        $html .= TableHelper::TableRowSelect(CTextFilter::getFilters(), "filter", "");
+        $html .= TableHelper::TableRowRadio(CTextFilter::getFilters(), "filter", "");
         $html .= TableHelper::TableRowSelect(HtmlCContent::GetContentTypes(), "type", "");
         $html .= TableHelper::TableRowTextArea("data", "");
         $html .= TableHelper::TableRowSubmit("addcontent_save", "spara");

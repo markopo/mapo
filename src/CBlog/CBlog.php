@@ -22,6 +22,21 @@ class CBlog {
     }
 
     /**
+     * @param $filter
+     * @param $data
+     * @return mixed
+     */
+    private function MakeFilter($filter, $data){
+
+        $filters = explode(",", $filter);
+
+        foreach($filters as $f){
+            $data = $this->cTextFilter->Filter($f, $data);
+        }
+        return $data;
+    }
+
+    /**
      * @param $pages
      * @return string
      */
@@ -31,10 +46,11 @@ class CBlog {
         if(count($pages) > 0){
 
             foreach($pages as $p){
-                $data = $this->cTextFilter->Filter($p->filter, $p->data);
-                $html .= "<div>
+
+                $published = date("Y-m-d",strtotime($p->published));
+                $html .= "<div class='blogpost'>
                          <h3><a href='blog.php?slug={$p->slug}'>{$p->title}</a></h3>
-                         <div>{$data}</div>
+                         <p>Datum: <i>{$published}</i></p>
                         </div>";
             }
         }
@@ -48,8 +64,8 @@ class CBlog {
      */
     public function ShowSlugBlog($page) {
 
-        $data = $this->cTextFilter->Filter($page->filter, $page->data);
-        return "<div>
+        $data = $this->MakeFilter($page->filter, $page->data);
+        return "<div  class='blogpost' >
                  <h3><a href='blog.php?slug={$page->slug}'>{$page->title}</a></h3>
                  <div>{$data}</div>
                 </div>";

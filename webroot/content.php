@@ -21,6 +21,10 @@ if(!$isLoggedIn){
 $cContent = new CContent($mapo['database']);
 
 
+
+echo Helpers::PostArrayIsSetOrNull("filter");
+
+
 /** update -- post */
 $editcontent_save = Helpers::PostIsSetOrNull("editcontent_save");
 if($editcontent_save != null){
@@ -30,7 +34,7 @@ if($editcontent_save != null){
     $updateParam->title = Helpers::PostIsSetOrNull("title");
     $updateParam->slug = Helpers::MakeSlug($updateParam->title);
     $updateParam->data = Helpers::PostOrEmpty("data");
-    $updateParam->filter = Helpers::PostIsSetOrNull("filter");
+    $updateParam->filter = Helpers::PostArrayIsSetOrNull("filter");
     $updateParam->deleted = Helpers::PostIsSetOrNull("deleted");
     $updateParam->deleted = $updateParam->deleted == '1' ? true : false;
 

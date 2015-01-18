@@ -148,7 +148,7 @@ class CContent extends CDatabase {
      * @return array
      */
     public function SelectAllBlog(){
-        $sql = "SELECT * FROM `content` WHERE deleted is null and type = 'blog' ORDER BY id ASC";
+        $sql = "SELECT * FROM `content` WHERE deleted is null and type = 'blog' ORDER BY id DESC";
         return parent::FetchAll($sql);
     }
 
